@@ -1,10 +1,52 @@
 import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
+import Toasted from 'vue-toasted'
 import store from './store'
+import moment from 'moment'
 
 Vue.config.productionTip = false
+
+Vue.use(VueAxios, axios)
+Vue.use(Toasted)
+
+Vue.router = router
+Vue.axios.defaults.baseURL = process.env.VUE_APP_API_URL
+Vue.prototype.moment = moment
+let defaultLocale = ''
+
+if (localStorage.locale) {
+  if (localStorage.locale === 'fi' || localStorage.locale === 'en') {
+    defaultLocale = localStorage.getItem('locale')
+  } else {
+    defaultLocale = 'en'
+    localStorage.setItem('locale', defaultLocale)
+  }
+} else {
+  defaultLocale = 'en'
+  localStorage.setItem('locale', defaultLocale)
+}
+
+const pixelache = new Vue({ data: { locale: 'en', slug: 'festival-2021' }})
+const i18n = new Vue({ data: { locale: defaultLocale}})
+
+pixelache.install = function(){
+  Object.defineProperty(Vue.prototype, '$pixelache', {
+    get () { return pixelache }
+  })
+}
+
+i18n.install = function(){
+  Object.defineProperty(Vue.prototype, '$i18n', {
+    get () { return i18n }
+  })
+}
+
+Vue.use(pixelache)
+Vue.use(i18n)
 
 new Vue({
   router,
