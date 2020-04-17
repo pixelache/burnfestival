@@ -14,34 +14,63 @@
       <div id="burnNav" class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'about'}}">
-            <span v-show="locale === 'en'">About</span>
-            <span v-show="locale === 'fi'">Info</span>
+            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
           </router-link>
           <router-link class="navbar-item" :to="{name: 'Blog'}">
-            <span v-show="locale === 'en'">Blog</span>
-            <span v-show="locale === 'fi'">Uutiset</span>
+            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
           </router-link>
           <router-link class="navbar-item" :to="{name: 'Opencall', params: {id: 'burn-festival-open-call'}}">
-            <span v-show="locale === 'en'">Open call</span>
-            <span v-show="locale === 'fi'">Open call</span>
+            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].open_call }}</span>
           </router-link>
           <a class="navbar-item" href="https://www.oodihelsinki.fi/" target="_blank">
-            <span v-show="locale === 'en'">Venue</span>
-            <span v-show="locale === 'fi'">Paikka</span>
+            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].venue }}</span>
           </a>
         </div>
         <div class="navbar-end">
           <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">ENG</a>
           <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FIN</a>
-          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SWE</a>
-          <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">RU</a>
+          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SVE</a>
+          <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУС</a>
         </div>
       </div>
     </nav>
-    <img class="burn_banner" alt="Vue logo" src="@/assets/images/burnbanner.jpg">
+    
     <router-view :key="$route.fullPath + '?locale=' + locale" />
-    <footer class="footer">
-      <img src="@/assets/images/footer_logo.png" />
+    <footer class="footer" v-if="!loading">    
+      <div class="social_container">
+        <div class="columns is-mobile">
+          <div class="column is-one-third-tablet">
+            <img class="footer_logo" src="@/assets/images/footer_logo.png" />
+          </div>
+          <div class="column footer_title_wrapper is-one-third-mobile has-text-centered">
+            <div class="title  has-text-centered">{{ moment(festival.attributes.start_at).format("Do ")}} –– {{ moment(festival.attributes.end_at).format("Do MMMM YYYY")}}</div>
+          </div>
+          <div class="column social_wrapper is-one-third-mobile">
+            <ul class="social">
+              <li>
+                <a href="https://www.facebook.com/pixelache">
+                  <img src="@/assets/images/some_fb.png" />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.flickr.com/photos/pixelache/">
+                  <img src="@/assets/images/some_flickr.png" />
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/pixelache">
+                  <img src="@/assets/images/some_twitter.png" />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/pixelache/">
+                  <img src="@/assets/images/some_insta.png" />
+                </a>
+              </li>                   
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
@@ -50,7 +79,9 @@ export default {
   name: 'App',
   data () {
     return {
-      locale: ''
+      festival: {},
+      locale: '',
+      loading: true
     }
   },
   created () {
@@ -92,6 +123,11 @@ export default {
     if (localStorage.locale) {
       this.locale = localStorage.getItem('locale')
     }
+    this.axios.get('/festivals/' + this.$pixelache.slug + '?locale=' + this.locale)
+      .then((resp) => {
+        this.festival = resp.data.data
+        this.loading = false
+      })
   },
   methods: {
     setLocale: function (locale) {

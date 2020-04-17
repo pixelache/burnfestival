@@ -32,7 +32,7 @@ if (localStorage.locale) {
 
 const pixelache = new Vue({ data: { locale: 'en', slug: 'festival-2021' }})
 const i18n = new Vue({ data: { locale: defaultLocale}})
-
+const texts = require('@/texts.json')
 pixelache.install = function(){
   Object.defineProperty(Vue.prototype, '$pixelache', {
     get () { return pixelache }
@@ -42,6 +42,9 @@ pixelache.install = function(){
 i18n.install = function(){
   Object.defineProperty(Vue.prototype, '$i18n', {
     get () { return i18n }
+  })
+  Object.defineProperty(Vue.prototype, '$texts', {
+    get () { return texts }
   })
 }
 

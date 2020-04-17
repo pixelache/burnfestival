@@ -20,19 +20,19 @@
           </p>
         <div class="columns">
           <div class="column">
-            <label class="label">Your name: <span class="required"> *</span></label>
+            <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_name }}</span> <span class="required"> *</span></label>
             <input type="text" class="input" v-model="opencallResponse.name" />
           </div>
         </div>
         <div class="columns">
           <div class="column">
-            <label class="label">Your email address: <span class="required"> *</span></label>
+            <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_email }}</span><span class="required"> *</span></label>
             <input type="text" class="input" v-model="opencallResponse.email" />
           </div>
         </div>
         <div class="columns">
           <div class="column">
-            <label class="label">Your phone number or contact info</label>
+            <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_phone }}</span></label>
             <input type="text" class="input" v-model="opencallResponse.phone" />
           </div>
         </div>
@@ -76,7 +76,7 @@
         </div>
         <div class="field is-grouped">
           <div class="control">
-            <button v-if="!submitting" class="button is-link">Submit
+            <button v-if="!submitting" class="button is-link"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].submit }}</span>
               <vue-hcaptcha ref="invisibleHcaptcha" size="invisible" :sitekey="hk" @verify="verifiedHcaptcha"></vue-hcaptcha>
             </button>
             <img v-else src="@/assets/images/ajax-loader.gif" />

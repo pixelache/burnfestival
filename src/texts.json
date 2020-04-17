@@ -1,0 +1,24 @@
+{
+  "en": {
+    "about": "About",
+    "news": "News",
+    "open_call": "Open Call",
+    "venue": "Venue",
+    "your_name": "Your name:",
+    "your_email": "Your email adress: ",
+    "your_phone": "Your phone number or other contact info:",
+    "submit": "Submit"
+  },
+  "fi": {
+    "about": "About",
+    "news": "Uutiset",
+    "open_call": "Avoin hae",
+    "venue": "Paikka"
+  },
+  "sv": {
+
+  }, 
+  "ru": {
+
+  }
+}

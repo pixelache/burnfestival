@@ -1,6 +1,6 @@
 @charset "utf-8";
 $navbar-padding-vertical: 0;
-$navbar-height: 7rem;
+$navbar-height: 5rem;
 $background: #333;
 $light_base_color: #EEE;
 $title-color: $light_base_color;
@@ -29,10 +29,34 @@ body {
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 
+  .social_container {
+    float: left;
+    width: 100%;
+    img.footer_logo {
+
+    }
+    .title {
+
+      font-size: 1.2rem;
+    }
+    ul.social {
+      float: right;
+      list-style-type: none;
+      li {
+        float: left;
+        a {
+          img {
+            max-height: 1.5rem;
+            padding: 0 0.2rem;
+          }
+        }
+      }
+    }
+  }
 }
 body, nav {
   background-color: #231f20;
@@ -47,6 +71,8 @@ img.burn_banner {
 b, strong {
   color: #CCC;
 }
+
+
 nav {
   .navbar-brand, .navbar-menu, {
     align-items: start;
@@ -84,26 +110,6 @@ section.about_text {
   }
 }
 
-section.festival_container {
-  .social_container {
-    h2 {
-      float: left;
-    }
-    ul.social {
-      float: right;
-      list-style-type: none;
-      li {
-        float: left;
-        a {
-          img {
-            max-height: 2rem;
-            padding: 0 0.2rem;
-          }
-        }
-      }
-    }
-  }
-}
 
 .while_waiting {
   top: 50%;
@@ -112,6 +118,7 @@ section.festival_container {
 }
 
 section.section {
+  padding: 2rem 1.5rem;
   &.page {
     padding-bottom: 5rem;
     img.page_banner {
@@ -123,8 +130,7 @@ section.section {
 
 }
 section.post_index {
-  max-height: 600px;
-  overflow-y: scroll;
+
   h2 {
     padding-left: 1rem;
   }
@@ -216,6 +222,44 @@ form {
     &.input {
       background-color: $light_base_color;
       color: black;
+    }
+  }
+}
+
+
+// tablet queries
+@media screen and (max-width: 1023px) {
+  nav {
+    .navbar-end {
+      a.navbar-item {
+        float: left;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  footer {
+    &.footer {
+      padding: 1rem 1.5rem 0rem 1rem;
+      .column {
+        padding: 0.25rem;
+      }
+      .social_container {
+        .columns {
+          display: block !important;
+        }
+        .footer_title_wrapper, .social_wrapper {
+          float: left;
+          width: 50%;
+          .title {
+            font-size: 0.8rem;
+          }
+          img {
+            height: 1.2rem;
+          }
+        }
+      }
     }
   }
 }

@@ -2,7 +2,9 @@
   <section class="section post_index has-text-left" v-if="!loading">
     <div class="columns">
       <div class="column">
-        <router-link tag="h2" class="title" :to="{name: 'Blog'}">News</router-link>
+        <router-link tag="h2" class="title" :to="{name: 'Blog'}">
+          <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
+        </router-link>
       </div>
     </div>
     <div class="columns is-multiline  has-text-left">
