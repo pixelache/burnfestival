@@ -2,21 +2,23 @@
   <section class="section post_standalone post" v-if="!loading">
     <div class="container">
       <div class="columns">
-        <div class="column has-text-centered">
+        <div class="column has-text-left">
           <h3 class="title">{{ post.attributes.title }}</h3>
         </div>
       </div>
       <div class="columns">
-        <div class="column has-text-centered">
+        <div class="column has-text-left">
           <div class="posted_at"> {{ moment(post.attributes.published_at).format('Do MMMM YYYY') }}</div>
         </div>
       </div>
       <div class="columns">
-        <img v-show="post.attributes.image.twelvehundred.url" :src="post.attributes.image.twelvehundred.url.replace('development', 'production')" />
+        <div class="column">
+          <img v-show="post.attributes.image.twelvehundred.url" :src="post.attributes.image.twelvehundred.url.replace('development', 'production')" />
+        </div>
       </div>
       <div class="post_content content has-text-left" v-html="post.attributes.body" />
     </div>
-    <div class="columns">
+    <div class="columns post_browser">
       <div class="column is-one-third">
         <div v-if="post.attributes.previous_post_by_festival">
           <b>Previous post: </b>

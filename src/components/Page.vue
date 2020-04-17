@@ -1,14 +1,16 @@
 <template>
-  <section class="section" v-if="!loading">
+  <section class="section page" v-if="!loading">
     <div class="container">
       <div class="columns">
-        <div class="column has-text-centered">
+        <div class="column has-text-left">
           <h3 class="title">{{ page.attributes.name }}</h3>
         </div>
       </div>
+      <img v-if="page.attributes.photos.length > 0" class="page_banner" :src="page.attributes.photos[0].filename.wide.url" />
       <div class="columns">
-        <img v-if="page.attributes.photos.length > 0"  :src="page.attributes.photos[0].twelvehundred.url.replace('development', 'production')" />
-        <div class="page_content" v-html="page.attributes.body" />
+        <div class="column">
+          <div class="page_content" v-html="page.attributes.body" />
+        </div>
       </div>
     </div>  
   </section>

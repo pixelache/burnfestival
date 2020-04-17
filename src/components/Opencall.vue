@@ -2,7 +2,7 @@
   <section class="section" v-if="!loading">
     <div class="container">
       <div class="columns">
-        <div class="column has-text-centered">
+        <div class="column has-text-left">
           <h3 class="title">{{ opencall.attributes.name }}</h3>
         </div>
       </div>

@@ -39,6 +39,11 @@ body, nav {
   color: $light_base_color;
 }
 
+img.burn_banner {
+  width: 100%;
+  height: auto;
+}
+
 b, strong {
   color: #CCC;
 }
@@ -48,7 +53,7 @@ nav {
   }
   .navbar-burger {
     height: 2.5rem;
-    span {
+    s§n {
       font-weight: bold;
     }
   }
@@ -58,7 +63,7 @@ nav {
   }
   .navbar-end {
     a.navbar-item {
-      font-size: 1rem;
+      font-size: 0.8rem;
       line-height: 1rem;
       &.active {
         font-weight: bold;
@@ -73,6 +78,10 @@ section.about_text {
   clear: left;
   max-height: 350px;
   overflow-y: scroll;
+  width: 100%;
+  .content {
+    padding-bottom: 4rem;
+  }
 }
 
 section.festival_container {
@@ -102,15 +111,39 @@ section.festival_container {
   left: 50%;
 }
 
+section.section {
+  &.page {
+    padding-bottom: 5rem;
+    img.page_banner {
+      width: 100%;
+      height: auto;
+      padding: 1.5rem 0;
+    }
+  }
+
+}
 section.post_index {
   max-height: 600px;
   overflow-y: scroll;
+  h2 {
+    padding-left: 1rem;
+  }
 }
+
 section.post_index, section.post_standalone {
   color: $light_base_color;
   .post_wrapper {
     padding: 2rem;
 
+  }
+  .post_content {
+    padding-bottom: 5rem;
+  }
+  .post_browser {
+    a {
+      font-weight: bold;
+      color: #FFF;
+    }
   }
   .post {
     height: 100%;
@@ -125,7 +158,7 @@ section.post_index, section.post_standalone {
     .excerpt {
       color: $light_base_color;
     }
-   
+
     padding-bottom: 4rem;
   }
   
@@ -139,7 +172,7 @@ section.full_index .post_index {
 .content {
   p {
     color: $light_base_color;
-    text-align: center;
+    text-align: left;
 
   }
 }

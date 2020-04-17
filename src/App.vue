@@ -24,14 +24,21 @@
           <router-link class="navbar-item" :to="{name: 'Opencall', params: {id: 'burn-festival-open-call'}}">
             <span v-show="locale === 'en'">Open call</span>
             <span v-show="locale === 'fi'">Open call</span>
-          </router-link>          
+          </router-link>
+          <a class="navbar-item" href="https://www.oodihelsinki.fi/" target="_blank">
+            <span v-show="locale === 'en'">Venue</span>
+            <span v-show="locale === 'fi'">Paikka</span>
+          </a>
         </div>
         <div class="navbar-end">
           <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">ENG</a>
           <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FIN</a>
+          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SWE</a>
+          <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">RU</a>
         </div>
       </div>
     </nav>
+    <img class="burn_banner" alt="Vue logo" src="@/assets/images/burnbanner.jpg">
     <router-view :key="$route.fullPath + '?locale=' + locale" />
     <footer class="footer">
       <img src="@/assets/images/footer_logo.png" />
@@ -51,6 +58,7 @@ export default {
 
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      const links = document.querySelectorAll('.navbar-item')
 
       // Check if there are any navbar burgers
       if ($navbarBurgers.length > 0) {
@@ -58,19 +66,26 @@ export default {
         // Add a click event on each of them
         $navbarBurgers.forEach( el => {
           el.addEventListener('click', () => {
-
             // Get the target from the "data-target" attribute
-            const target = el.dataset.target;
-            const $target = document.getElementById(target);
-
+            const target = el.dataset.target
+            const $target = document.getElementById(target)
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-            el.classList.toggle('is-active');
-            $target.classList.toggle('is-active');
-
-          });
-        });
+            el.classList.toggle('is-active')
+            $target.classList.toggle('is-active')
+          })
+        })
+        links.forEach(link => {
+          link.addEventListener("click", function () {
+            $navbarBurgers.forEach( el => {
+              el.classList.toggle('is-active')
+              const target = el.dataset.target
+              const $target = document.getElementById(target)
+              el.classList.remove("is-active");
+              $target.classList.toggle('is-active')
+            })
+          })
+        })
       }
-
     })
   },
   mounted () {

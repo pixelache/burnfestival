@@ -1,7 +1,5 @@
 <template>
-  <section class="section full_index">
-    <PostsIndex />
-  </section>
+  <PostsIndex />
 </template>
 
 <script>

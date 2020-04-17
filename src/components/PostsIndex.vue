@@ -1,6 +1,10 @@
 <template>
-  <section class="section post_index has-text-centered" v-if="!loading">
-    <router-link tag="h2" class="title" :to="{name: 'Blog'}">News</router-link>
+  <section class="section post_index has-text-left" v-if="!loading">
+    <div class="columns">
+      <div class="column">
+        <router-link tag="h2" class="title" :to="{name: 'Blog'}">News</router-link>
+      </div>
+    </div>
     <div class="columns is-multiline  has-text-left">
       <div class="post_wrapper column is-one-third-desktop is-half-tablet is-one-quarter-widescreen" v-for="post in posts" :key="'post_' + post.id">
         <div class="post">
