@@ -4,21 +4,43 @@
     "news": "News",
     "open_call": "Open Call",
     "venue": "Venue",
+    "date_range": "6.-13 June 2021",
     "your_name": "Your name:",
-    "your_email": "Your email adress: ",
+    "your_email": "Your email address: ",
     "your_phone": "Your phone number or other contact info:",
     "submit": "Submit"
   },
   "fi": {
-    "about": "About",
+    "about": "Festivaalista",
     "news": "Uutiset",
-    "open_call": "Avoin hae",
-    "venue": "Paikka"
+    "open_call": "Avoin haku",
+    "venue": "Tapahtumapaikka",
+    "date_range": "6.-13. kesäkuuta 2021",
+    "your_name": "Nimi:",
+    "your_email": "Sähköposti: ",
+    "your_phone": "Puhelin:",
+    "submit": "Submit"
   },
   "sv": {
-
+    "about": "Om festival",
+    "news": "Nyheter",
+    "open_call": "Open call",
+    "venue": "Festivalen Plats",
+    "date_range": "6.-13. Juni 2021",
+    "your_name": "Ditt namn:",
+    "your_email": "e-post: ",
+    "your_phone": "Telefon:",
+    "submit": "Submit"
   }, 
   "ru": {
-
+    "about": "О проекте",
+    "news": "Новости",
+    "open_call": "Прием заявок",
+    "venue": "Площадка фестиваля",
+    "date_range": "6.-13. июня 2021",
+    "your_name": "Ваше имя:",
+    "your_email": "Электронный адрес: ",
+    "your_phone": "номер телефона:",
+    "submit": "Submit"
   }
 }

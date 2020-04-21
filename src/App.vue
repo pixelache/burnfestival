@@ -40,10 +40,13 @@
       <div class="social_container">
         <div class="columns is-mobile">
           <div class="column is-one-third-tablet">
-            <img class="footer_logo" src="@/assets/images/footer_logo.png" />
+            <a href="/"><img class="footer_logo" src="@/assets/images/footer_logo.png" /></a>
           </div>
           <div class="column footer_title_wrapper is-one-third-mobile has-text-centered">
-            <div class="title  has-text-centered">{{ moment(festival.attributes.start_at).format("Do ")}} –– {{ moment(festival.attributes.end_at).format("Do MMMM YYYY")}}</div>
+            <div class="title  has-text-centered">
+              <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].date_range }}</span>
+            <!-- {{ moment(festival.attributes.start_at).format("Do ")}} –– {{ moment(festival.attributes.end_at).format("Do MMMM YYYY")}} -->
+            </div>
           </div>
           <div class="column social_wrapper is-one-third-mobile">
             <ul class="social">
