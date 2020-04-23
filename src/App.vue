@@ -27,10 +27,10 @@
           </a>
         </div>
         <div class="navbar-end">
-          <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">ENG</a>
-          <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FIN</a>
-          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SVE</a>
-          <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУС</a>
+          <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
+          <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>
+          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SV</a>
+          <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУ</a>
         </div>
       </div>
     </nav>
@@ -40,7 +40,7 @@
       <div class="social_container">
         <div class="columns is-mobile">
           <div class="column is-one-third-tablet">
-            <a href="/"><img class="footer_logo" src="@/assets/images/footer_logo.png" /></a>
+            <a href="https://pixelache.ac/"><img class="footer_logo" src="@/assets/images/footer_logo.png" /></a>
           </div>
           <div class="column footer_title_wrapper is-one-third-mobile has-text-centered">
             <div class="title  has-text-centered">

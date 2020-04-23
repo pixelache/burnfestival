@@ -10,7 +10,9 @@
     <div class="columns is-multiline  has-text-left">
       <div class="post_wrapper column is-one-third-desktop is-half-tablet is-one-quarter-widescreen" v-for="post in posts" :key="'post_' + post.id">
         <div class="post">
-          <img v-show="post.attributes.image.box.url" :src="post.attributes.image.box.url.replace('development', 'production')" />
+          <router-link :to="{name: 'Post', params: { id: post.attributes.slug }}">
+            <img v-show="post.attributes.image.box.url" :src="post.attributes.image.box.url.replace('development', 'production')" />
+          </router-link>
           <h3 class="subtitle">
             <router-link :to="{name: 'Post', params: { id: post.attributes.slug }}">
               {{ post.attributes.title }}

@@ -1,13 +1,13 @@
 <template>
   <section class="section" v-if="!loading">
-    <div class="container">
+    <div class="opencall_container">
       <div class="columns">
         <div class="column has-text-left">
           <h3 class="title">{{ opencall.attributes.name }}</h3>
         </div>
       </div>
       <div class="columns">
-        <div class="column is-half-desktop is-centered">
+        <div class="column is-two-thirds-tablet is-centered">
           <div class="content opencall has-text-left" v-html="opencall.attributes.description" />
         </div>
       </div>
@@ -19,26 +19,26 @@
             </ul>
           </p>
         <div class="columns">
-          <div class="column">
+          <div class="column  is-two-thirds-tablet">
             <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_name }}</span> <span class="required"> *</span></label>
             <input type="text" class="input" v-model="opencallResponse.name" />
           </div>
         </div>
         <div class="columns">
-          <div class="column">
+          <div class="column is-two-thirds-tablet">
             <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_email }}</span><span class="required"> *</span></label>
             <input type="text" class="input" v-model="opencallResponse.email" />
           </div>
         </div>
         <div class="columns">
-          <div class="column">
+          <div class="column is-two-thirds-tablet">
             <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_phone }}</span></label>
             <input type="text" class="input" v-model="opencallResponse.phone" />
           </div>
         </div>
 
         <div class="columns" v-for="(question, index) in opencall.attributes.opencallquestions" :key="question.id">
-          <div class="column">
+          <div class="column is-two-thirds-tablet">
             <div class="field">
 
               <label class="label">
@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="columns">
-          <div class="column">
+          <div class="column is-two-thirds-tablet">
             
           </div>
         </div>
@@ -85,7 +85,7 @@
       </form>
       <div v-else>
         <div class="columns">
-          <div class="column">
+          <div class="column is-two-thirds-tablet">
             <p class="is-size-5">Thank you for submitting your application. We will be in touch soon.</p>
             <br />
             <router-link tag="button" class="button" to="/">Return to the frontpage</router-link>
