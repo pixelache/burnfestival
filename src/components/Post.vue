@@ -48,6 +48,7 @@ export default {
     }
   },
   mounted () {
+    this.$parent.$emit('closeMenu', true)
     this.axios.get('/festivals/' + this.$pixelache.slug + '/posts/' + this.$route.params.id + '?locale=' + this.$i18n.locale)
       .then((resp) => {
         this.post = resp.data.data

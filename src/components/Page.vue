@@ -28,6 +28,7 @@ export default {
     }
   },
   mounted () {
+    this.$parent.$emit('closeMenu', true)
     this.axios.get('/festivals/' + this.$pixelache.slug + '/pages/' + this.$route.params.id + '?locale=' + this.$i18n.locale)
       .then((resp) => {
         this.page = resp.data.data

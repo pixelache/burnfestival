@@ -176,6 +176,7 @@ export default {
     }
   },
   created () {
+    this.$parent.$emit('closeMenu', true)
     this.axios.get('/opencalls/' + this.$route.params.id + '?locale=' + this.$i18n.locale)
       .then((resp) => {
         this.opencall = resp.data.data
