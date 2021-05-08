@@ -20,6 +20,16 @@ const routes = [
     component: () => import('@/views/Blog.vue')
   },
   {
+    path: '/contributors/:categoryId',
+    name: 'Contributors',
+    component: () => import('@/components/Contributors.vue')
+  },
+  {
+    path: '/contributors/:categoryId/:id',
+    name: 'Contributor',
+    component: () => import('@/components/Contributor.vue')
+  },
+  {
     path: '/calls/:id',
     name: 'Opencall',
     component: () => import('@/components/Opencall.vue')

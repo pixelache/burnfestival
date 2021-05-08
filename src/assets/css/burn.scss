@@ -85,12 +85,14 @@ nav {
   }
   a.navbar-item {
     font-size: 1.8rem;
+
     line-height: 1.8rem;
   }
   .navbar-end {
     a.navbar-item {
-      font-size: 0.8rem;
-      line-height: 1rem;
+
+      font-size: 1.25rem;
+      line-height: 1.5rem;
       &.active {
         font-weight: bold;
         pointer-events: none;

@@ -19,18 +19,18 @@ Vue.prototype.moment = moment
 let defaultLocale = ''
 
 if (localStorage.locale) {
-  if (localStorage.locale === 'fi' || localStorage.locale === 'en') {
+  if (localStorage.locale === 'fi' || localStorage.locale === 'en'  || localStorage.locale === 'ru'  || localStorage.locale === 'sv') {
     defaultLocale = localStorage.getItem('locale')
   } else {
-    defaultLocale = 'en'
+    defaultLocale = 'fi'
     localStorage.setItem('locale', defaultLocale)
   }
 } else {
-  defaultLocale = 'en'
+  defaultLocale = 'fi'
   localStorage.setItem('locale', defaultLocale)
 }
 
-const pixelache = new Vue({ data: { locale: 'en', slug: 'festival-2021' }})
+const pixelache = new Vue({ data: { locale: 'fi', slug: 'festival-2021' }})
 const i18n = new Vue({ data: { locale: defaultLocale}})
 const texts = require('@/texts.json')
 pixelache.install = function(){

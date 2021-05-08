@@ -14,23 +14,24 @@
       <div id="burnNav" class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'about'}}">
-            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
+            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
           </router-link>
           <router-link class="navbar-item" :to="{name: 'Blog'}">
-            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
+            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
           </router-link>
-          <router-link class="navbar-item" :to="{name: 'Opencall', params: {id: 'burn-festival-open-call'}}">
-            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].open_call }}</span>
+          <router-link class="navbar-item" :to="{name: 'Opencall', params: {id: 'pixelache-festival-2021-burn-audio'}}">
+            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].open_call }}</span>
           </router-link>
           <a class="navbar-item" href="https://www.oodihelsinki.fi/" target="_blank">
-            <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].venue }}</span>
+            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].venue }}</span>
           </a>
         </div>
         <div class="navbar-end">
-          <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
           <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>
-          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SV</a>
+          <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
           <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУ</a>
+          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SV</a>
+     
         </div>
       </div>
     </nav>

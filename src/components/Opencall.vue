@@ -49,7 +49,7 @@
 
                 <div class="field-body">
                   <textarea v-if="question.question_type === 1" class="textarea" v-model="opencallResponse[question.id]" />
-                  <input v-else-if="question.question_type === 2" class="input" type="text" v-model="opencallResponse[question.id]" />
+                  <input v-else-if="question.question_type === 2 || question.question_type === 6" class="input" type="text" v-model="opencallResponse[question.id]" />
                   <div v-else-if="question.question_type === 3" class="file" >
                     <input class="file-insput" type="file" :ref="'file_' +question.id" @change="previewFiles($event, question.id)" />
   <!--                   <span class="file-cta">
@@ -87,7 +87,7 @@
         <div v-else>
           <div class="columns">
             <div class="column is-two-thirds-tablet">
-              <p class="is-size-5">Thank you for submitting your application. We will be in touch soon.</p>
+              <p class="is-size-5" v-html="opencall.attributes.submitted_text"></p>
               <br />
               <router-link tag="button" class="button" to="/">Return to the frontpage</router-link>
             </div>
@@ -148,10 +148,12 @@ export default {
       this.formData.append('opencallsubmission[opencall_id]',this.opencall.id)
       this.formData.append('opencallsubmission[phone]', this.opencallResponse.phone)
       this.opencall.attributes.opencallquestions.forEach((question) => {
-        this.formData.append('opencallsubmission[opencallanswers_attributes][' + question.id + '][opencallquestion_id]', question.id)
-        if (question.question_type !== 4) {
-          this.formData.append('opencallsubmission[opencallanswers_attributes][' + question.id + '][answer]', this.opencallResponse[question.id])
-        } 
+        if (this.opencallResponse[question.id]) {
+          this.formData.append('opencallsubmission[opencallanswers_attributes][' + question.id + '][opencallquestion_id]', question.id)
+          // if (question.question_type !== 4) {
+            this.formData.append('opencallsubmission[opencallanswers_attributes][' + question.id + '][answer]', this.opencallResponse[question.id])
+          // } 
+        }
       })
       // console.log(this.formData)
       this.axios({method: 'post', url: opencallsubmissionUrl, data: this.formData,
@@ -161,11 +163,14 @@ export default {
       })
       .then((response) => {
         this.submitting = false
-        if (response.status === 204) {
+        if (response.status === 204 || response.status === 201) {
           this.notSubmitted = false
         } else {
           this.errors.push('There was an error submitting your application. Please try again or contact office@pixelache.ac if you are still having problems.')
         }
+      }).catch(() => {
+        this.submitting = false
+        this.errors.push('There was an error submitting your application. Please try again or contact office@pixelache.ac if you are still having problems.')
       })
     },
     validateOpencall () {
