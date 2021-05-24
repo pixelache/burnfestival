@@ -1,14 +1,19 @@
 @charset "utf-8";
 $navbar-padding-vertical: 0;
-$navbar-height: 5rem;
+$navbar-height: 4rem;
 $background: #333;
 $light_base_color: #EEE;
 $title-color: $light_base_color;
 $subtitle-color: $light_base_color;
 $link: $light_base_color;
+
+$primary: #EEE;
 $link-hover: #AAA;
 $navbar-item-color: $light_base_color;
 $navbar-item-hover-color: #414141;
+$navbar-dropdown-item-hover-color: #414141;
+$navbar-dropdown-background-color: rgb(47, 46, 46);
+$navbar-dropdown-item-hover-background-color:  white;
 $navbar-background-color : #231f20;
 $footer-background-color: #414141;
 $footer-padding: 1rem 1.5rem;
@@ -74,19 +79,52 @@ b, strong {
 
 
 nav {
+  
+  &.top {
+    z-index: 40;
+  }
+  .navbar-link:not(.is-arrowless)::after, .select:not(.is-multiple):not(.is-loading)::after {
+    font-size: 1.2rem;
+  }
   .navbar-brand, .navbar-menu, {
     align-items: start;
   }
+  .about-active {
+    background-color: #fafafa !important;
+    a { color: black; }
+    a.navbar-item {
+      color: white;
+    }
+  }
   .navbar-burger {
     height: 2.5rem;
-    s§n {
+    span {
       font-weight: bold;
     }
   }
-  a.navbar-item {
+  .navbar-dropdown {
+    a.navbar-item {
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+    }
+  }
+  a.navbar-item, a.navbar-link {
     font-size: 1.8rem;
+    padding-left: 0.6rem;
+    padding-right: 1.8rem;
+    line-height: 2rem;
 
-    line-height: 1.8rem;
+
+     &.is-active, &.router-link-active {
+      background-color: #fafafa !important;
+      color: #414141;
+    }
+
+
+
+  }
+  .navbar-brand a.router-link-active {
+    background-color: initial !important;
   }
   .navbar-end {
     a.navbar-item {
@@ -112,7 +150,11 @@ section.about_text {
   }
 }
 
-
+.metadata {
+  .tag {
+    margin-left: 0.75rem;
+  }
+}
 .while_waiting {
   top: 50%;
   position: absolute;
@@ -146,8 +188,35 @@ section.post_index {
   }
 }
 
+section.event {
+  padding-bottom: 6rem;
+  figure {
+    margin-bottom: 2rem;
+  }
+  .content {
+    h1, h2, h3, h4, h5, h6 {
+      color: white;
+    }
+    &.disclaimer {
+      a {
+        font-weight: bold;
+      }
+    }
+  }
+}
+.contributor_events {
+  .content {
+    h4 {
+      margin: 0.75rem 0;
+    }
+  }
+}
 section.post_index, section.post_standalone {
   color: $light_base_color;
+  .category_description, .category_image {
+    padding-left: 1rem;
+    margin: 1rem 0;
+  }
   .post_wrapper {
     padding: 2rem;
 
@@ -168,7 +237,15 @@ section.post_index, section.post_standalone {
       color: #FFF;
     }
   }
-  .post {
+  .contributor {
+    h3 {
+      margin: 1rem 0 0.5rem 0;
+    }
+    .content {
+      margin-top: 0.5rem;
+    }
+  }
+  .post, .contributor {
     height: 100%;
     .subtitle {
       margin-bottom: 0;
@@ -183,6 +260,24 @@ section.post_index, section.post_standalone {
     }
 
     padding-bottom: 2rem;
+
+    &.contributor {
+      h3 {
+        margin: 1rem 0 0.5rem 0;
+      }
+      .content {
+        margin-top: 0.5rem;
+      }
+      .events {
+        ul {
+          li {
+            a {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
   }
   
 }
@@ -192,6 +287,22 @@ section.full_index .post_index {
   overflow: none;
 }
 
+.video-embed {
+  position: relative;
+  padding-bottom: 56.10%;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-embed iframe,
+.video-embed object,
+.video-embed embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .content {
   p {
     color: $light_base_color;
@@ -209,12 +320,22 @@ section.full_index .post_index {
   }
 }
 
+section.schedule {
+  @include mobile {
+    padding-top: 0;
+  }
+}
+
+.select select {
+  background-color: transparent;
+}
 form {
   padding-bottom: 3rem;
   p.errors {
     font-size: 1.3rem;
     color: red;
   }
+
   label {
     &.label {
       color: white;
@@ -243,6 +364,15 @@ form {
   }
 }
 
+table.table {
+  background-color: transparent;
+  tr {
+    td {
+      background-color: transparent;
+      color: white;
+    }
+  }
+}
 
 // tablet queries
 @media screen and (max-width: 1023px) {

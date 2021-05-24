@@ -8,7 +8,29 @@
     "your_name": "Your name:",
     "your_email": "Your email address:",
     "your_phone": "Your phone number or other contact info:",
-    "submit": "Submit"
+    "submit": "Submit",
+    "events": "Events",
+    "see_map": "See on map",
+    "choose_day": "Choose day:",
+    "contributors": "Contributors",
+    "register_to_participate": "Register to participate!",
+    "limited_places": "There are limited available places in this events.",
+    "event_full": "This event is FULLY BOOKED.  However, you may still register for our waiting list and you will receive notification if a place frees up.",
+    "event_requires_approval": "There are limited places available. Please fill out the registration form and we will contact you if you are selected.",
+    "disclaimer": "We encourage all praticipants and the audience to abide to the safety guidelines put in place by the Finnish and regional govenment, more about the guidelines <a href=\"https://valtioneuvosto.fi/en/information-on-coronavirus/current-restrictions\">here</a>.",
+    "curatorial": "Curatorial",
+    "production": "Production",
+    "partners": "Partners",
+    "support": "Support",
+    "practical_info": "Practical Info",
+    "coronavirus": "Coronavirus",
+    "radio": "Radio",
+    "site_specific": "Site-specific",
+    "presentations_and_performances": "Presentations + Performances", 
+    "installations": "Installations",
+    "online": "Online",
+    "programme": "Programme",
+    "map": "Map"
   },
   "fi": {
     "about": "Festivaalista",
@@ -19,7 +41,16 @@
     "your_name": "Nimi:",
     "your_email": "Sähköposti:",
     "your_phone": "Puhelin:",
-    "submit": "Lähetä"
+    "submit": "Lähetä",
+    "events": "Events",
+    "see_map": "See on map",
+    "choose_day": "Choose day:",
+    "contributors": "Contributors",
+    "register_to_participate": "Register to participate!",
+    "limited_places": "There are limited available places in this events.",
+    "event_full": "This event is FULLY BOOKED.  However, you may still register for our waiting list and you will receive notification if a place frees up.",
+    "event_requires_approval": "There are limited places available. Please fill out the registration form and we will contact you if you are selected.",
+    "disclaimer": "We encourage all praticipants and the audience to abide to the safety guidelines put in place by the Finnish and regional govenment, more about the guidelines <a href=\"https://valtioneuvosto.fi/en/information-on-coronavirus/current-restrictions\">here</a>."
   },
   "sv": {
     "about": "Om festival",
@@ -30,7 +61,17 @@
     "your_name": "Ditt namn:",
     "your_email": "e-post:",
     "your_phone": "Telefon:",
-    "submit": "Skicka in"
+    "submit": "Skicka in",
+    "events": "Events",
+    "see_map": "See on map",
+    "choose_day": "Choose day:",
+    "contributors": "Contributors",
+    "register_to_participate": "Register to participate!",
+    "limited_places": "There are limited available places in this events.",
+    "event_full": "This event is FULLY BOOKED.  However, you may still register for our waiting list and you will receive notification if a place frees up.",
+    "event_requires_approval": "There are limited places available. Please fill out the registration form and we will contact you if you are selected.",
+    "disclaimer": "We encourage all praticipants and the audience to abide to the safety guidelines put in place by the Finnish and regional govenment, more about the guidelines <a href=\"https://valtioneuvosto.fi/en/information-on-coronavirus/current-restrictions\">here</a>."
+
   }, 
   "ru": {
     "about": "О проекте",
@@ -41,6 +82,16 @@
     "your_name": "Ваше имя:",
     "your_email": "Электронный адрес: ",
     "your_phone": "номер телефона:",
-    "submit": "Отправлять"
+    "submit": "Отправлять",
+    "events": "Events",
+    "see_map": "See on map",
+    "choose_day": "Choose day:",
+    "contributors": "Contributors",
+    "register_to_participate": "Register to participate!",
+    "limited_places": "There are limited available places in this events.",
+    "event_full": "This event is FULLY BOOKED.  However, you may still register for our waiting list and you will receive notification if a place frees up.",
+    "event_requires_approval": "There are limited places available. Please fill out the registration form and we will contact you if you are selected.",
+    "disclaimer": "We encourage all praticipants and the audience to abide to the safety guidelines put in place by the Finnish and regional govenment, more about the guidelines <a href=\"https://valtioneuvosto.fi/en/information-on-coronavirus/current-restrictions\">here</a>."
+
   }
 }

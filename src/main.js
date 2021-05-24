@@ -7,7 +7,10 @@ import router from './router'
 import Toasted from 'vue-toasted'
 import store from './store'
 import moment from 'moment'
-
+import 'moment/locale/fi'
+import 'moment/locale/sv'
+import 'moment/locale/ru'
+import 'moment/locale/en-gb'
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)

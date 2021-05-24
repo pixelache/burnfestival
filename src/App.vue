@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
           <img src="@/assets/images/burn_logo.png" />
@@ -13,18 +13,74 @@
       </div>
       <div id="burnNav" class="navbar-menu">
         <div class="navbar-start">
-          <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'about'}}">
-            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
-          </router-link>
-          <router-link class="navbar-item" :to="{name: 'Blog'}">
+          <div class="navbar-link navbar-item has-dropdown is-hoverable" :class="$route.name == 'Page' && !$route.fullPath.match(/oodi$/) && !$route.fullPath.match(/map$/) ? 'about-active' : ''">
+            <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'about'}}">
+              <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
+            </router-link>
+            <div class="navbar-dropdown">
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'curatorial-notes'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].curatorial }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'production'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].production }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'partners'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].partners }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'support'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].support }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'practical-info'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].practical_info }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'coronavirus'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].coronavirus }}</span>
+              </router-link>
+            </div>
+          </div>
+
+
+          <router-link class="navbar-item" :to="{name: 'News'}" :class="$router.currentRoute.path.match(/^\/posts/) ? 'is-active' : ''">
             <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
           </router-link>
-          <router-link class="navbar-item" :to="{name: 'Opencall', params: {id: 'pixelache-festival-2021-burn-audio'}}">
-            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].open_call }}</span>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" :class="$router.currentRoute.path.match(/contributors/) ? 'is-active' : ''">
+               <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].contributors }}</span>
+            </a>
+            <div class="navbar-dropdown">
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'radio'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].radio }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'site-specific'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].site_specific }}</span>
+              </router-link>  
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'presentations-performances'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].presentations_and_performances }}</span>
+              </router-link>  
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'installations'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].installations }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'online'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].online }}</span>
+              </router-link>  
+            </div>
+          </div>
+          <router-link class="navbar-item" :to="{name: 'Schedule'}">
+            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].programme }}</span>
           </router-link>
-          <a class="navbar-item" href="https://www.oodihelsinki.fi/" target="_blank">
-            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].venue }}</span>
-          </a>
+          <div class="navbar-item has-dropdown is-hoverable has-text-centered" :class="$route.fullPath.match(/oodi$/) || $route.fullPath.match(/map$/) ? 'about-active' : ''">
+            <a class="navbar-link">
+               <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].venue }}</span>
+            </a>
+            <div class="navbar-dropdown" >
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'oodi'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">Oodi</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'site-map'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].map }}</span>
+              </router-link>
+            </div>
+          </div>
         </div>
         <div class="navbar-end">
           <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>

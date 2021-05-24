@@ -9,25 +9,36 @@ const routes = [
     name: 'Home',
     component: () => import('@/views/Home.vue')
   },
-  {
+   {
     path: '/posts/:id',
     name: 'Post',
     component: () => import('@/components/Post.vue')
   },
-  {
-    path: '/blog',
-    name: 'Blog',
-    component: () => import('@/views/Blog.vue')
-  },
+ 
   {
     path: '/contributors/:categoryId',
     name: 'Contributors',
     component: () => import('@/components/Contributors.vue')
   },
   {
+    path: '/events/:id',
+    name: 'Event',
+    component: () => import('@/components/Event.vue')
+  },
+  {
     path: '/contributors/:categoryId/:id',
     name: 'Contributor',
     component: () => import('@/components/Contributor.vue')
+  },
+  {
+    path: '/schedule',
+    name: 'Schedule',
+    component: () => import('@/components/Schedule.vue')
+  },
+  {
+    path: '/news',
+    name: 'News',
+    component: () => import('@/components/PostsIndex.vue')
   },
   {
     path: '/calls/:id',
@@ -42,6 +53,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import('@/components/Page.vue')
   },
+  
 ]
 
 const router = new VueRouter({

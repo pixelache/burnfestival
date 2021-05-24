@@ -2,7 +2,7 @@
   <section class="section post_index has-text-left" v-if="!loading">
     <div class="columns">
       <div class="column">
-        <router-link tag="h2" class="title" :to="{name: 'Blog'}">
+        <router-link tag="h2" class="title" :to="{name: 'News'}">
           <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
         </router-link>
       </div>
@@ -23,6 +23,10 @@
         </div>
       </div>
     </div>
+    <div v-if="loadingNext" class="while_waiting">
+
+      <img src="@/assets/images/ajax-loader.gif">
+    </div>
   </section>
   <div v-else class="while_waiting">
     <img src="@/assets/images/ajax-loader.gif">
@@ -33,12 +37,39 @@ import truncate from 'truncate-html'
 export default {
   data() {
     return {
+      scrolledToBottom: true,
       loading: true,
       posts: [],
+      page: 1,
+      loadingNext: false
     }
   },
-
+  name: 'NewsIndex',
   methods : {
+    newsScroll () {
+      window.onscroll = () => {
+        if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight) {
+        
+          if (this.scrolledToBottom) {
+            this.scrolledToBottom = false
+            this.loadingNext = true
+            this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?page=' + parseInt(this.page+1) + '&locale=' + this.$i18n.locale)
+            .then((resp) => {
+
+              if (resp.data.data.length > 0) {
+                this.posts.push.apply(this.posts, resp.data.data)
+                this.loadingNext = false
+                this.loading = false
+                this.page++
+                this.scrolledToBottom = true
+              }
+            })
+          }
+        }
+      }
+
+    },
+
     excerpt_or_text(post) {
       if (post.attributes.excerpt) {
         return post.attributes.excerpt
@@ -48,11 +79,14 @@ export default {
     }
   },
   mounted () {
-    this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?locale=' + this.$i18n.locale)
-      .then((resp) => {
-        this.posts = resp.data.data
-        this.loading = false
-      })
+    this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?page=' + this.page + '&locale=' + this.$i18n.locale)
+    .then((resp) => {
+
+      this.posts = resp.data.data
+      this.loading = false
+    })
+    this.newsScroll();
+
 
 
   }
