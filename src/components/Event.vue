@@ -34,13 +34,17 @@
           <h2 class="title">{{ $texts[$i18n.locale].register_to_participate }}</h2>
         </div>
       </div>
-      <form enctype="multipart/form-data" id="submission" @submit.enter.prevent="validateRegistration">
-        <p class="errors" v-if="errors.length">
-          <b>Please correct the following error(s):</b>
-          <ul>
-            <li v-for="error in errors" :key="error">{{ error }}</li>
-          </ul>
-        </p>
+      <form v-if="notSubmitted" enctype="multipart/form-data" id="submission" @submit.enter.prevent="validateRegistration">
+        <div class="columns is-centered" v-if="errors.length">
+          <div class="column  is-8">
+            <p class="errors">
+              <b>Please correct the following error(s):</b>
+              <ul>
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+              </ul>
+            </p>
+          </div>
+        </div>
         <div class="columns is-centered">
           <div class="column  is-8">
             <label class="label"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].your_name }}</span> <span class="required"> *</span></label>
@@ -77,11 +81,11 @@
             <textarea class="textarea" v-model="registrationForm.project_description" />
           </div>
         </div>        
-        <div class="columns is-centered" v-if="event.attributes.question_description">
+        <div class="columns is-centered">
           <div class="column  is-8">
             <div class="field is-grouped">
               <div class="control">
-                <button v-if="!submitting" class="button is-link"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].submit }}</span>
+                <button v-if="!submitting" :disabled="!registrationForm.name || !registrationForm.email || !registrationForm.phone" class="button is-link"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].submit }}</span>
                   <vue-hcaptcha ref="invisibleHcaptcha" size="invisible" :sitekey="hk" @verify="verifiedHcaptcha"></vue-hcaptcha>
                 </button>
                 <img v-else src="@/assets/images/ajax-loader.gif" />
@@ -90,6 +94,16 @@
           </div>
         </div>
       </form>
+      <div v-else>
+        <div v-if="successfulRegistration" class="columns is-centered">
+          <div class="column is-8">
+            {{ $texts[$i18n.locale].successful_registration }}
+          </div>
+        </div>
+        <div v-else>
+          There was an error. Please contact office@pixelache.ac.
+        </div>
+      </div>
           <!-- <div v-if="event.attributes.max_attendees">
             <div v-if="event.attributes.hide_registrants">
               <p>{{ $texts[$i18n.locale].limited_places }}</p>
@@ -132,7 +146,9 @@
         locale: this.$i18n.locale,
         loading: true,
         event: {},
+        successfulRegistration: false,
         place: {},
+        notSubmitted: true,
         registrationOpen: false,
         registrationForm: {},
         submitting: false,
@@ -151,18 +167,28 @@
           return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
         }
       },
-      verifiedHcaptcha () {
+      verifiedHcaptcha (token) {
         this.submitting = true
-        let registrationUrl = ''
-        this.axios({method: 'post', url: registrationUrl, data: this.registrationForm })
+        let data =  {"h-captcha-response": token, attendee: this.registrationForm  }
+        let registrationUrl = '/events/' + this.$route.params.id +'/attendees'
+        this.axios({method: 'post', url: registrationUrl, data: data})
           .then((response) => {
             this.submitting = false
             if (response.status === 204 || response.status === 201) {
               this.notSubmitted = false
+              this.successfulRegistration = true
+            } else if (response.status === 422) {
+              console.log('how to catch 422 then?')
+               console.log(response)
+              this.errors.push(response.data.errors.map((e) => e.title ).join('; '))
             } else {
               this.errors.push('There was an error submitting your application. Please try again or contact office@pixelache.ac if you are still having problems.')
             }
-          }).catch(() => {
+          }).catch(error => {
+            console.log('how to catch 422 here then?')
+            if (error.response.data.errors) {
+              this.errors.push(error.response.data.errors.map((e) => e.title ).join('; '))
+            }
             this.submitting = false
             this.errors.push('There was an error submitting your application. Please try again or contact office@pixelache.ac if you are still having problems.')
           })

@@ -51,6 +51,9 @@
               <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'radio'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].radio }}</span>
               </router-link>
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'workshops'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].workshops }}</span>
+              </router-link>
               <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'site-specific'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].site_specific }}</span>
               </router-link>  

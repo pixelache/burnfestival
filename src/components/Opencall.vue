@@ -77,7 +77,7 @@
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <button v-if="!submitting" class="button is-link"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].submit }}</span>
+              <button v-if="!submitting"  class="button is-link"><span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].submit }}</span>
                 <vue-hcaptcha ref="invisibleHcaptcha" size="invisible" :sitekey="hk" @verify="verifiedHcaptcha"></vue-hcaptcha>
               </button>
               <img v-else src="@/assets/images/ajax-loader.gif" />

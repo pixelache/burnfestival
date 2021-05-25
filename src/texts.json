@@ -23,6 +23,7 @@
     "partners": "Partners",
     "support": "Support",
     "practical_info": "Practical Info",
+    "workshops": "Workshops",
     "coronavirus": "Coronavirus",
     "radio": "Radio",
     "site_specific": "Site-specific",
@@ -30,7 +31,8 @@
     "installations": "Installations",
     "online": "Online",
     "programme": "Programme",
-    "map": "Map"
+    "map": "Map",
+    "successful_registration": "Thank you for registering for this event."
   },
   "fi": {
     "about": "Festivaalista",
