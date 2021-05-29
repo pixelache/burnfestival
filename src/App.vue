@@ -12,7 +12,15 @@
          </a>
       </div>
       <div id="burnNav" class="navbar-menu">
+           <div class="mobile_lang is-hidden-tablet navbar-link navbar-item ">
+              <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>
+              <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
+              <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУ</a>
+              <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SV</a>
+        
+          </div>
         <div class="navbar-start">
+       
           <div class="navbar-link navbar-item has-dropdown is-hoverable" :class="$route.name == 'Page' && !$route.fullPath.match(/oodi$/) && !$route.fullPath.match(/map$/) ? 'about-active' : ''">
             <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'about'}}">
               <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
@@ -20,6 +28,9 @@
             <div class="navbar-dropdown">
               <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'curatorial-notes'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].curatorial }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'press'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].press }}</span>
               </router-link>
               <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'production'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].production }}</span>
@@ -30,12 +41,7 @@
               <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'support'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].support }}</span>
               </router-link>
-              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'practical-info'}}">
-                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].practical_info }}</span>
-              </router-link>
-              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'coronavirus'}}">
-                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].coronavirus }}</span>
-              </router-link>
+
             </div>
           </div>
 
@@ -43,36 +49,46 @@
           <router-link class="navbar-item" :to="{name: 'News'}" :class="$router.currentRoute.path.match(/^\/posts/) ? 'is-active' : ''">
             <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].news }}</span>
           </router-link>
+          <router-link class="navbar-item" :to="{name: 'Schedule'}">
+            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].programme }}</span>
+          </router-link>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" :class="$router.currentRoute.path.match(/contributors/) ? 'is-active' : ''">
                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].contributors }}</span>
             </a>
             <div class="navbar-dropdown">
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'site-specific'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].site_specific }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'online'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">AV-Stream</span>
+              </router-link>  
               <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'radio'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].radio }}</span>
               </router-link>
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'presentations-performances'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].presentations_and_performances }}</span>
+              </router-link> 
               <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'workshops'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].workshops }}</span>
               </router-link>
-              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'site-specific'}}">
-                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].site_specific }}</span>
-              </router-link>  
-              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'presentations-performances'}}">
-                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].presentations_and_performances }}</span>
-              </router-link>  
+              
+               
               <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'installations'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].installations }}</span>
               </router-link>
-              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'online'}}">
-                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].online }}</span>
-              </router-link>  
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'conversation'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].conversations }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Contributors', params: {categoryId: 'screenings'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].screenings }}</span>
+              </router-link>
+               
             </div>
           </div>
-          <router-link class="navbar-item" :to="{name: 'Schedule'}">
-            <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].programme }}</span>
-          </router-link>
-          <div class="navbar-item has-dropdown is-hoverable has-text-centered" :class="$route.fullPath.match(/oodi$/) || $route.fullPath.match(/map$/) ? 'about-active' : ''">
-            <a class="navbar-link">
+          
+          <div class="navbar-item navbar-link has-dropdown is-hoverable" :class="$route.fullPath.match(/oodi$/) || $route.fullPath.match(/map$/) ? 'about-active' : ''">
+            <a class="navbar-item">
                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].venue }}</span>
             </a>
             <div class="navbar-dropdown" >
@@ -82,10 +98,16 @@
               <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'site-map'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].map }}</span>
               </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'practical-info'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].practical_info }}</span>
+              </router-link>
+              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'coronavirus'}}">
+                <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].coronavirus }}</span>
+              </router-link>
             </div>
           </div>
         </div>
-        <div class="navbar-end">
+        <div class="navbar-end is-hidden-mobile">
           <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>
           <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
           <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУ</a>

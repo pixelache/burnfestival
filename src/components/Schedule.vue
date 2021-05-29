@@ -20,21 +20,28 @@
     <div class="tabs is-hidden-tablet is-toggle is-fullwidth">
       <ul>
         <li v-bind:class="{ 'is-active': tabsel == 'oodi' }" @click="tabsel = 'oodi'">
-          <a>OODI site-specific</a>
+          <a>Oodi Site-specific</a>
         </li>
         <li v-bind:class="{ 'is-active': tabsel == 'radio' }" @click="tabsel = 'radio'">
-          <a > Radio</a>
+          <a>Radio</a>
         </li>
       </ul>
     </div>
     <div class="schedule_container">
       <div class="columns">
         <div class="column is-6 has-text-left"  v-show="!isMobile()  || tabsel == 'oodi'">
-          <h3 class="title is-hidden-mobile">OODI / Site-Specific</h3>
+          <h3 class="title is-hidden-mobile">Oodi Site-specific</h3>
           <table class="table"  v-if="events.length > 0">
             <tbody>              
-              <tr v-for="event in events" :key="event.id">
-                <td>{{moment(event.attributes.start_at).locale(locale).format("LT") }}</td>
+              <tr v-for="event in events" :key="event.id + '__' + moment(selectedDate).format('YYYY-MM-DD')">
+                <td>
+                  <span v-if="isInstallation(event)">
+                    {{ $texts[$i18n.locale].durational }}
+                  </span>
+                  <span v-else>
+                    {{moment(event.attributes.start_at).locale(locale).format("LT") }}
+                  </span>
+                </td>
                 <td class="is-hidden-mobile">
                   <figure class="image is-128x128" v-if="event.attributes.image_thumb_url">
                     <img :src="event.attributes.image_thumb_url.replace('development', 'production')" />
@@ -47,10 +54,14 @@
                   <span class="is-size-7">{{ getRange(event.attributes.start_at, event.attributes.end_at) }}</span>
                   <div v-if="event.relationships.contributors.data.length > 0" class="contributor_events">
                     <span class="is-size-6">{{ $texts[$i18n.locale].contributors }}: 
-                      <router-link v-show="contributors[contributorId.id]" v-for="(contributorId, index) in event.relationships.contributors.data" :key="event.id + '_' + contributorId" :to="{name: 'Contributor', params: {id: contributors[contributorId.id].attributes.slug }}">
+                      <router-link v-show="contributors[contributorId.id]" v-for="(contributorId, index) in event.relationships.contributors.data" :key="event.id + '_' + contributorId.id" :to="{name: 'Contributor', params: {categoryId: 'site-specific', id: contributors[contributorId.id].attributes.slug }}">
                         {{ contributors[contributorId.id].attributes.name }}<span v-if="index+1 < event.relationships.contributors.data.length">, </span>
                       </router-link>
                     </span>
+
+                  </div>
+                  <div v-if="event.relationships.festivalthemes.data" class="tags">
+                    <span class="tag is-dark"  v-show="festivalthemes[ft.id].attributes.slug !== 'site-specific'" v-for="ft in event.relationships.festivalthemes.data" :key="ft.id"> {{ festivalthemes[ft.id].attributes.name }}</span>
                   </div>
                 </td>
               </tr>
@@ -81,7 +92,10 @@
         navCalendar: [],
         locale: null,
         radio: null,
-        contributors: {}
+        contributors: {},
+        festivalthemes: {},
+        installationId: null,
+        conversationsId: null
       }
     },
     name: 'Schedule',
@@ -92,6 +106,10 @@
         } else {
           return false
         }
+      },
+      isInstallation(event) {
+        return event.relationships.festivalthemes.data.map((i) => i.id).includes(this.installationId) ||
+         event.relationships.festivalthemes.data.map((i) => i.id).includes(this.conversationsId) 
       },
       selectDay(day) {
         if (day.target) {
@@ -111,8 +129,30 @@
           })
         this.axios.get('/festivals/' + this.$pixelache.slug + '/events/?by_date=' + moment(day).format('YYYY-MM-DD') + '&locale=' + this.$i18n.locale)
           .then((resp) => {
-            this.events = resp.data.data
+            this.events = []
+            let allEvents = resp.data.data
             this.contributors = normalize(resp.data, { camelizeKeys: false }).contributor
+            this.festivalthemes = normalize(resp.data, { camelizeKeys: false }).festivaltheme
+            Object.keys(this.festivalthemes).forEach((ftId) => {
+              if (this.festivalthemes[ftId]) {
+                if (this.festivalthemes[ftId].attributes.slug === 'installations') {
+                  this.installationId = ftId
+                } else if (this.festivalthemes[ftId].attributes.slug === 'conversation') {
+                  this.conversationsId = ftId
+                }
+              } else {
+                console.log(ftId)
+              }
+            })
+            let installations = []
+            allEvents.forEach((e) => {
+              if (this.isInstallation(e)) {
+                installations.push(e)
+              } else { 
+                this.events.push(e)
+              }
+            })
+            this.events.push.apply(this.events, installations)
             this.loading = false
           })
       },

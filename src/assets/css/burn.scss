@@ -9,6 +9,7 @@ $link: $light_base_color;
 
 $primary: #EEE;
 $link-hover: #AAA;
+$success: #AAA;
 $navbar-item-color: $light_base_color;
 $navbar-item-hover-color: #414141;
 $navbar-dropdown-item-hover-color: #414141;
@@ -79,21 +80,51 @@ b, strong {
 
 
 nav {
-  
+
+  .navbar-menu.is-active {
+    @include mobile {
+      border-bottom: 2px solid white;
+      padding-bottom: 3rem;
+      margin-bottom: 2rem;
+    }
+  }
   &.top {
     z-index: 40;
   }
   .navbar-link:not(.is-arrowless)::after, .select:not(.is-multiple):not(.is-loading)::after {
     font-size: 1.2rem;
+    @include mobile {
+      display: none;
+    }
   }
   .navbar-brand, .navbar-menu, {
     align-items: start;
   }
   .about-active {
+    &:not(.is-arrowless)::after {
+      border-color: black;
+    }
     background-color: #fafafa !important;
-    a { color: black; }
+    a { color: white; }
     a.navbar-item {
-      color: white;
+      color: black;
+      @include mobile {
+        color: black;
+       
+      }
+    }
+  
+      .navbar-dropdown {
+        a.navbar-item {
+          color: white;
+          &:hover {
+            color: black;
+          }
+          &.router-link-active {
+            color: black;
+          }
+        }
+      
     }
   }
   .navbar-burger {
@@ -103,17 +134,39 @@ nav {
     }
   }
   .navbar-dropdown {
+    @include mobile {
+      padding: 0;
+    }
     a.navbar-item {
       font-size: 1.5rem;
-      line-height: 1.8rem;
+      line-height: 1.2rem;
+      @include widescreen {
+        font-size: 1.8rem;
+        line-height: 2rem;
+      }
+      @include mobile {
+        font-size: 1rem;
+        float: left;
+        line-height: 1.25rem;
+        clear: inherit;
+      }
     }
   }
-  a.navbar-item, a.navbar-link {
-    font-size: 1.8rem;
+  .navbar-item, .navbar-link {
+    font-size: 1.15rem;
+    @include widescreen {
+      font-size: 1.8rem;
+      padding-right: 1.8rem;
+    }
     padding-left: 0.6rem;
-    padding-right: 1.8rem;
+    padding-right: 0.8rem;
     line-height: 2rem;
-
+    @include mobile {
+     
+      line-height: 1.25rem;
+      font-size: 1.2rem;
+      clear: both;
+    }
 
      &.is-active, &.router-link-active {
       background-color: #fafafa !important;
@@ -129,14 +182,28 @@ nav {
   .navbar-end {
     a.navbar-item {
 
-      font-size: 1.25rem;
-      line-height: 1.5rem;
+      font-size: 1rem;
+      @include widescreen {
+        font-size: 1.5rem;
+      }
+      @include mobile {
+        font-size: 0.8rem;
+      }
+      line-height: 1.25rem;
       &.active {
         font-weight: bold;
         pointer-events: none;
         cursor: default;
       }
     }
+  }
+  .mobile_lang {
+    float: right;
+    a {
+      float: left;
+      clear: none;
+    }
+ 
   }
 }
 
@@ -193,11 +260,18 @@ section.event {
   figure {
     margin-bottom: 2rem;
   }
+  .event_contributor {
+    margin-top: 2rem;
+    .content {
+      padding-bottom: 4rem;
+    }
+  }
   .content {
     h1, h2, h3, h4, h5, h6 {
       color: white;
     }
     &.disclaimer {
+      margin-top: 2rem;
       a {
         font-weight: bold;
       }
@@ -323,6 +397,9 @@ section.full_index .post_index {
 section.schedule {
   @include mobile {
     padding-top: 0;
+  }
+  .tags {
+    margin-top: 0.5rem;
   }
 }
 
