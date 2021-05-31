@@ -1,7 +1,10 @@
 <template>
   <div>
-    <img class="burn_banner" alt="Vue logo" src="@/assets/images/burnbanner.jpg">
+    <img class="burn_banner" alt="Pixleache 2021 Burn" src="@/assets/images/burnbanner.jpg">
     <PostsIndex />
+    <center>
+      <img class="supporters" alt="Funders and supporters" src="@/assets/images/logos.png">
+    </center>
   </div>
 </template>
 

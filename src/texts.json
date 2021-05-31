@@ -1,5 +1,6 @@
 {
   "en": {
+    "shortform": "EN",
     "about": "About",
     "news": "News",
     "open_call": "Open Call",
@@ -42,9 +43,16 @@
     "av-stream": "AV-Stream",
     "conversations": "Conversations",
     "screenings": "Screenings",
-    "contributor": "Contributor"
+    "contributor": "Contributor",
+    "searchblurb": "Search ...",
+    "no_results_title": "We're sorry...",
+    "no_results_text": "There are no results that match your search term. Please try again.",
+    "search_results": "Search results:",
+    "registration_required": "Regstration required",
+    "registration_required_full": "Event is full - waiting list available"
   },
   "fi": {
+    "shortform": "FI",
     "about": "Festivaali",
     "news": "Uutiset",
     "open_call": "Avoin haku",
@@ -58,13 +66,13 @@
     "press": "Tiedotteet",
     "see_map": "Katso kartalta",
     "choose_day": "Valitse päivä:",
-    "contributors": "Osallistujat",
+    "contributors": "Esiintyjät",
     "register_to_participate": "Ilmoittaudu!",
     "limited_places": "Tapahtumiin on rajallinen määrä paikkoja.",
     "event_full": "Tapahtuma on TÄYNNÄ. Voit ilmoittautua odotuslistalle. Saat ilmoituksen, mikäli paikkoja vapautuu.",
     "event_requires_approval": "Paikkoja on rajoitetusti. Täytä ilmoittautumislomake. Olemme yhteydessä, mikäli saat paikan. Kiitos!",
     "disclaimer": "Kannustamme esiintyjiä ja yleisöä huomioimaan alueelliset turvaohjeet, kts. <a href=\"https://valtioneuvosto.fi/en/information-on-coronavirus/current-restrictions\">lisätietoa täällä</a>.",
-   "curatorial_notes": "Kuratoriset huomiot",
+    "curatorial_notes": "Kuratoriset huomiot",
     "production": "Tuotanto",
     "partners": "Kumppanit",
     "support": "Tuki",
@@ -84,10 +92,16 @@
     "av-stream": "AV-striim",
     "conversations": "Keskutelut",
     "screenings": "Näytökset",
-    "contributor": "Osallistuja"
-    
+    "contributor": "Esiintyjä",
+    "searchblurb": "Search ...",
+    "no_results_title": "We're sorry...",
+    "no_results_text": "There are no results that match your search term. Please try again.",
+    "search_results": "Search results:",
+    "registration_required": "Regstration required",
+    "registration_required_full": "Event is full - waiting list available"
   },
   "sv": {
+    "shortform": "SV",
     "about": "Om festival",
     "news": "Nyheter",
     "open_call": "Open call",
@@ -129,10 +143,16 @@
     "av-stream": "AV-Stream",
     "conversations": "Konversationer",
     "screenings": "Visningar",
-    "contributor": "Bidragsgivare"
-
-  }, 
+    "contributor": "Bidragsgivare",
+    "searchblurb": "Search ...",
+    "no_results_title": "We're sorry...",
+    "no_results_text": "There are no results that match your search term. Please try again.",
+    "search_results": "Search results:",
+    "registration_required": "Regstration required",
+    "registration_required_full": "Event is full - waiting list available"
+   }, 
   "ru": {
+    "shortform": "РУ",
     "about": "О проекте",
      "news": "Новости",
      "open_call": "Прием заявок",
@@ -171,7 +191,12 @@
      "av-stream": "AB-стреам",
      "conversations": "Диалоги",
      "screenings": "фильмы",
-     "contributor": "В проекте участвуют"
-
+     "contributor": "В проекте участвуют",
+     "searchblurb": "Search ...",
+     "no_results_title": "We're sorry...",
+     "no_results_text": "There are no results that match your search term. Please try again.",
+     "search_results": "Search results:",
+     "registration_required": "Regstration required",
+     "registration_required_full": "Event is full - waiting list available"
   }
 }

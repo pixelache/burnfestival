@@ -12,12 +12,21 @@
          </a>
       </div>
       <div id="burnNav" class="navbar-menu">
+        
            <div class="mobile_lang is-hidden-tablet navbar-link navbar-item ">
               <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>
               <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
               <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУ</a>
               <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SV</a>
         
+          </div>
+          <div class="navbar-link field is-hidden-tablet">
+            <p class="control has-icons-right">
+              <input class="input" type="search"  v-model="searchterm" v-on:keyup.enter="postSearch" :placeholder="$texts[$i18n.locale].searchblurb">
+              <span class="icon is-small is-right">
+                <icon class="gg-search" />
+              </span>
+            </p>
           </div>
         <div class="navbar-start">
        
@@ -107,12 +116,24 @@
             </div>
           </div>
         </div>
+        
         <div class="navbar-end is-hidden-mobile">
-          <a href="#" :class="locale === 'fi' ? 'active' : ''" @click="setLocale('fi')" class="navbar-item">FI</a>
-          <a href="#" :class="locale === 'en' ? 'active' : ''"  @click="setLocale('en')" class="navbar-item">EN</a>
-          <a href="#" :class="locale === 'ru' ? 'active' : ''" @click="setLocale('ru')" class="navbar-item">РУ</a>
-          <a href="#" :class="locale === 'sv' ? 'active' : ''" @click="setLocale('sv')" class="navbar-item">SV</a>
-     
+          <div class="searchbox">
+            <icon class="gg-search" v-show="!searchOpen" @click="searchOpen = !searchOpen" />
+            <p class="control has-icons-right" v-show="searchOpen">
+              <input class="input" type="search"  v-model="searchterm" v-on:keyup.enter="postSearch" :placeholder="$texts[$i18n.locale].searchblurb">
+              <span class="icon is-small is-right">
+                <icon class="gg-search" />
+              </span>
+            </p>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a href="#" class="active navbar-item">{{ $texts[$i18n.locale].shortform }} </a>
+            <div class="navbar-dropdown">
+              <a v-for="l in otherLocales" href="#" :key="l" :class="locale === l ? 'active' : ''" @click="setLocale(l)" class="navbar-item">{{ $texts[l].shortform }}</a>
+
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -166,7 +187,11 @@ export default {
     return {
       festival: {},
       locale: '',
-      loading: true
+      loading: true,
+      searchOpen: false,
+      searchterm: null,
+      searchrouteKey: null,
+      otherLocales: []
     }
   },
   created () {
@@ -174,11 +199,16 @@ export default {
     this.$on('closeMenu', () => {
       this.closeMobileMenu()
     })
+    this.$on('clearSearch', () => {
+      this.searchterm = null
+      this.searchOpen = false
+    })
   },
   mounted () {
     if (localStorage.locale) {
       this.locale = localStorage.getItem('locale')
     }
+    this.resetLocalesMenu()
     this.axios.get('/festivals/' + this.$pixelache.slug + '?locale=' + this.locale)
       .then((resp) => {
         this.festival = resp.data.data
@@ -186,6 +216,20 @@ export default {
       })
   },
   methods: {
+    postSearch () {
+      if (this.searchterm) {
+        this.searchrouteKey = this.searchterm
+        this.$router.push({ name: 'SearchResults', params: {term : this.searchterm}})
+      }
+    },
+    resetLocalesMenu () {
+      const availableLocales = ['en', 'fi', 'ru', 'sv']
+      let index = availableLocales.indexOf(this.locale)
+      this.otherLocales = availableLocales
+      if (index !== -1) {
+        this.otherLocales.splice(index, 1)
+      }
+    },
     closeMobileMenu () {
       document.getElementById('burnNav').classList.remove("is-active")
     },
@@ -228,7 +272,7 @@ export default {
       this.locale = locale
       this.$i18n.locale = locale
       localStorage.setItem('locale', locale)
-      // window.location.reload(false)
+      this.resetLocalesMenu()
     }
   },
   watch: {

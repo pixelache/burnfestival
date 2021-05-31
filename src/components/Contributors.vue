@@ -19,7 +19,7 @@
         v-for="contributor in contributors" :key="'contributor_' + contributor.id">
         <div class="post contributor">
           <router-link :to="{name: 'Contributor', params: { categoryId: category.attributes.slug, id: contributor.attributes.slug }}">
-            <figure v-if="category.attributes.slug !== 'radio'" class="image is-square">
+            <figure class="image is-square">
               <img v-if="contributor.attributes.image_box_url"
               :src="contributor.attributes.image_box_url.replace('development', 'production')" />
             </figure>

@@ -19,6 +19,7 @@ $navbar-background-color : #231f20;
 $footer-background-color: #414141;
 $footer-padding: 1rem 1.5rem;
 @import "~bulma/bulma";
+@import 'search';
 
 html,
 body {
@@ -80,11 +81,13 @@ b, strong {
 
 
 nav {
-
+  input[type=search] {
+    color: black;
+  }
   .navbar-menu.is-active {
     @include mobile {
       border-bottom: 2px solid white;
-      padding-bottom: 3rem;
+      padding-bottom: 5rem;
       margin-bottom: 2rem;
     }
   }
@@ -141,7 +144,7 @@ nav {
       font-size: 1.5rem;
       line-height: 1.2rem;
       @include widescreen {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         line-height: 2rem;
       }
       @include mobile {
@@ -152,10 +155,25 @@ nav {
       }
     }
   }
+  .navbar-end {
+    .searchbox {
+ 
+      padding-top: 1.35rem;
+      padding-right: 0.5rem;
+      cursor: pointer;
+      p {
+        margin-top: -1rem;
+      }
+    }
+    a.navbar-item.active {
+      padding-top: 1.15rem;
+    }
+  }
   .navbar-item, .navbar-link {
+   
     font-size: 1.15rem;
     @include widescreen {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       padding-right: 1.8rem;
     }
     padding-left: 0.6rem;
@@ -395,6 +413,7 @@ section.full_index .post_index {
 }
 
 section.schedule {
+  padding-bottom: 9rem;
   @include mobile {
     padding-top: 0;
   }
@@ -485,5 +504,25 @@ table.table {
         }
       }
     }
+  }
+}
+
+
+section.search_results {
+  padding-bottom: 9rem;
+  figure {
+    margin-bottom: 1.5rem;
+  }
+  .posted_at {
+    margin-bottom: 1rem;
+  }
+  h2.subtitle {
+    margin-top: 2rem;
+  }
+  h3.subtitle {
+    font-weight: bold;
+  }
+  .events ul li a {
+    font-weight: bold;
   }
 }

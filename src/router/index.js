@@ -46,6 +46,11 @@ const routes = [
     component: () => import('@/components/Opencall.vue')
   },
   {
+    path: '/search/:term',
+    name: 'SearchResults',
+    component: () => import('@/components/SearchResults.vue')
+  },
+  {
     path: '/:id',
     name: 'Page',
     // route level code-splitting

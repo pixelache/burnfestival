@@ -12,14 +12,21 @@
     </div>
     <div class="columns is-centered metadata">
       <div class="column is-8">
-        <h2 class="subtitle">{{ place[event.attributes.place_id].attributes.name }} - <span class="is-size-6">{{ place[event.attributes.place_id].attributes.address_no_country }}</span>
-          <router-link target="_blank" :to="{name: 'Page', params: {id: 'site-map'}}" class="tag is-primary">{{ $texts[$i18n.locale].see_map }}</router-link> 
+        <h2 class="subtitle">{{ place[event.attributes.place_id].attributes.name }}  
+          <div v-if="event.attributes.place_id === 189">
+
+            <!-- target="_blank" href="#" class="tag is-primary">{{ $texts[$i18n.locale].listen }}</a>   -->
+          <!-- <a v-if="event.attributes.place_id === 189" target="_blank" href="#" class="tag is-primary">{{ $texts[$i18n.locale].listen }}</a>   -->
+          </div>
+          <span v-else class="is-size-6"> - {{ place[event.attributes.place_id].attributes.address_no_country }}</span>
+            <router-link target="_blank" :to="{name: 'Page', params: {id: 'site-map'}}" class="tag is-primary">{{ $texts[$i18n.locale].see_map }}</router-link> 
+          </span>
         </h2>
       </div>
     </div>
     <div class="columns is-centered" >
       <div class="column is-8">
-        <figure class="image" >
+        <figure class="image" v-if="event.attributes.image_url">
           <img
             :src="event.attributes.image_url.replace('development', 'production')" />
           
@@ -36,7 +43,7 @@
         <div class="columns is-multiline  has-text-left" v-if="event.relationships.contributors">   
           <div class="post_wrapper column is-half-desktop is-full-tablet" v-for="contributor in event.relationships.contributors.data" :key="'contributor' + contributor.id">
             <div class="post contributor">
-              <router-link :to="{name: 'Contributor', params: { categoryId: festivalthemes[event.relationships.festivalthemes.data[0].id].attributes.slug, id: contributors[contributor.id].attributes.slug }}">
+              <router-link :to="{name: 'Contributor', params: { categoryId: contributors[contributor.id].attributes.slug, id: contributors[contributor.id].attributes.slug }}">
                 <figure class="image is-square">
                   <img  v-if="contributors[contributor.id].attributes.image_box_url" 
                   :src="contributors[contributor.id].attributes.image_box_url.replace('development', 'production')" />

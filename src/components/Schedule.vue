@@ -62,6 +62,8 @@
                   </div>
                   <div v-if="event.relationships.festivalthemes.data" class="tags">
                     <span class="tag is-dark"  v-show="festivalthemes[ft.id].attributes.slug !== 'site-specific'" v-for="ft in event.relationships.festivalthemes.data" :key="ft.id"> {{ festivalthemes[ft.id].attributes.name }}</span>
+                    <span class="tag is-primary" v-show="event.attributes.registration_required && !event.attributes.is_full">{{ $texts[$i18n.locale].registration_required }}</span>
+                    <span class="tag is-primary full" v-show="event.attributes.registration_required && event.attributes.is_full">{{ $texts[$i18n.locale].registration_required_full }}</span>
                   </div>
                 </td>
               </tr>
