@@ -33,6 +33,19 @@ body {
   position: relative;
   padding-bottom: 1em; /* Height of footer */
   min-height: 100%;
+
+  .twitch .twitch-video {
+    padding-top: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  
+  .twitch .twitch-video iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
 }
 
 footer {
@@ -246,6 +259,7 @@ section.about_text {
   left: 50%;
 }
 
+
 section.section {
   padding: 2rem 1.5rem;
   &.page {
@@ -264,7 +278,9 @@ section.section {
       }
     }
   }
-
+  &.streams {
+    padding: 3.5rem 1.5rem;
+  }
 }
 section.post_index {
 

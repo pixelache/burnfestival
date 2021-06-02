@@ -49,7 +49,9 @@
     "no_results_text": "There are no results that match your search term. Please try again.",
     "search_results": "Search results:",
     "registration_required": "Regstration required",
-    "registration_required_full": "Event is full - waiting list available"
+    "registration_required_full": "Event is full - waiting list available",
+    "listen_live": "Listen - live!",
+    "watch_online": "Watch online"
   },
   "fi": {
     "shortform": "FI",
@@ -98,7 +100,9 @@
     "no_results_text": "There are no results that match your search term. Please try again.",
     "search_results": "Search results:",
     "registration_required": "Regstration required",
-    "registration_required_full": "Event is full - waiting list available"
+    "registration_required_full": "Event is full - waiting list available",
+    "listen_live": "Listen - live!",
+    "watch_online": "Watch online"
   },
   "sv": {
     "shortform": "SV",
@@ -149,7 +153,9 @@
     "no_results_text": "There are no results that match your search term. Please try again.",
     "search_results": "Search results:",
     "registration_required": "Regstration required",
-    "registration_required_full": "Event is full - waiting list available"
+    "registration_required_full": "Event is full - waiting list available",
+    "listen_live": "Listen - live!",
+    "watch_online": "Watch online"
    }, 
   "ru": {
     "shortform": "РУ",
@@ -197,6 +203,8 @@
      "no_results_text": "There are no results that match your search term. Please try again.",
      "search_results": "Search results:",
      "registration_required": "Regstration required",
-     "registration_required_full": "Event is full - waiting list available"
+     "registration_required_full": "Event is full - waiting list available",
+     "listen_live": "Listen - live!",
+     "watch_online": "Watch online"
   }
 }

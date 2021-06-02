@@ -11,6 +11,9 @@ import 'moment/locale/fi'
 import 'moment/locale/sv'
 import 'moment/locale/ru'
 import 'moment/locale/en-gb'
+import LoadScript from 'vue-plugin-load-script';
+
+Vue.use(LoadScript);
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
