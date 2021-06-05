@@ -20,7 +20,6 @@
     "event_full": "This event is FULLY BOOKED.  However, you may still register for our waiting list and you will receive notification if a place frees up.",
     "event_requires_approval": "There are limited places available. Please fill out the registration form and we will contact you if you are selected.",
     "disclaimer": "We encourage all praticipants and the audience to abide to the safety guidelines put in place by the Finnish and regional govenment, more about the guidelines <a href=\"https://valtioneuvosto.fi/en/information-on-coronavirus/current-restrictions\">here</a>.",
-  
     "curatorial": "Curatorial notes",
     "production": "Production",
     "partners": "Partners",
@@ -51,7 +50,13 @@
     "registration_required": "Regstration required",
     "registration_required_full": "Event is full - waiting list available",
     "listen_live": "Listen - live!",
-    "watch_online": "Watch online"
+    "watch_online": "Watch online",
+    "archive": "Archive",
+    "full_radio_schedule": "See the full radio schedule...",
+    "currently_streaming": "Currently streaming",
+    "streaming_next": "Streaming next",
+    "nothing_live": "Nothing is currently live streaming.",
+    "radio_for": "Radio schedule for"
   },
   "fi": {
     "shortform": "FI",
@@ -102,7 +107,13 @@
     "registration_required": "Regstration required",
     "registration_required_full": "Event is full - waiting list available",
     "listen_live": "Listen - live!",
-    "watch_online": "Watch online"
+    "watch_online": "Watch online",
+    "archive": "Archive",
+    "full_radio_schedule": "See the full radio schedule...",
+    "currently_streaming": "Currently streaming",
+    "streaming_next": "Streaming next",
+    "nothing_live": "Nothing is currently live streaming.",
+    "radio_for": "Radio schedule for"
   },
   "sv": {
     "shortform": "SV",
@@ -155,7 +166,13 @@
     "registration_required": "Regstration required",
     "registration_required_full": "Event is full - waiting list available",
     "listen_live": "Listen - live!",
-    "watch_online": "Watch online"
+    "watch_online": "Watch online",
+    "archive": "Archive",
+    "full_radio_schedule": "See the full radio schedule...",
+    "currently_streaming": "Currently streaming",
+    "streaming_next": "Streaming next",
+    "nothing_live": "Nothing is currently live streaming.",
+    "radio_for": "Radio schedule for"
    }, 
   "ru": {
     "shortform": "РУ",
@@ -198,13 +215,19 @@
      "conversations": "Диалоги",
      "screenings": "фильмы",
      "contributor": "В проекте участвуют",
-     "searchblurb": "Search ...",
-     "no_results_title": "We're sorry...",
-     "no_results_text": "There are no results that match your search term. Please try again.",
-     "search_results": "Search results:",
-     "registration_required": "Regstration required",
-     "registration_required_full": "Event is full - waiting list available",
-     "listen_live": "Listen - live!",
-     "watch_online": "Watch online"
+     "searchblurb": "Поиск...",
+     "no_results_title": "Нам жаль...",
+     "no_results_text": "К сожалению, по вашему запросу ничего не найдено. Попробуйте поискать что нибудь другое.",
+     "search_results": "Результаты поиска:",
+     "registration_required": "Требуется регистрация",
+     "registration_required_full": "Ивент полный - комната ожидания доступна",
+     "listen_live": "Слушайте live!",
+     "watch_online": "Смотрите online!",
+     "archive": "Archive",
+     "full_radio_schedule": "See the full radio schedule...",
+     "currently_streaming": "Currently streaming",
+     "streaming_next": "Streaming next",
+     "nothing_live": "Nothing is currently live streaming.",
+     "radio_for": "Radio schedule for"
   }
 }

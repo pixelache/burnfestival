@@ -18,10 +18,10 @@
       </div>
     </div>
     <div v-if="events.length > 0" class="columns contributor_events is-centered">
-       <div class="column is-6">
-         <h4 class="title">{{ $texts[$i18n.locale].events }}: </h4>
-         <div class="columns"> 
-           <div class="column is-6" v-for="event in events" :key="event.id">
+      <div class="column is-6">
+        <h4 class="title">{{ $texts[$i18n.locale].events }}: </h4>
+        <div class="columns"> 
+          <div class="column is-6" v-for="event in events" :key="event.id">
             <figure class="image is-4x3" v-if="event.attributes.relation_image">
               <img
                 :src="event.attributes.relation_image.replace('development', 'production')" />
@@ -40,6 +40,20 @@
         </div>
       </div>
     </div>
+    <div v-if="contributor.relationships.attachments.data.length > 0" class="columns contributor_events is-centered">
+      <div class="column is-6">
+        <h4 class="title">{{ $texts[$i18n.locale].archive }}: </h4>
+        <div class="columns" v-for="attachment in contributor.relationships.attachments.data" :key="attachment.id + '_atc'"> 
+          <div class="column is-6" v-if="attachments[attachment.id].attributes.attachment_festival_slug === $pixelache.slug">
+            <aplayer v-if="attachments[attachment.id].attributes.attachedfile_content_type =~ /^audio/" :music="{
+              title: attachments[attachment.id].attributes.attachment_event_name,
+              artist: contributor.attributes.name,
+              src: attachments[attachment.id].attributes.attachedfile_url
+              }" />
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <div v-else class="while_waiting">
     <img src="@/assets/images/ajax-loader.gif">
@@ -48,14 +62,20 @@
 <script>
   import moment from 'moment'
   import normalize from 'json-api-normalizer'
+  import Aplayer from 'vue-aplayer'
+
   export default {
     data() {
       return {
         loading: true,
         events: [],
         contributor: {},
+        attachments: {},
         locale: this.$i18n.locale,
       }
+    },
+    components: {
+        Aplayer
     },
     name: 'Contributor',
     methods: {
@@ -80,6 +100,7 @@
       this.axios.get('/contributors/' + this.$route.params.id + '?locale=' + this.$i18n.locale)
         .then((resp) => {
           this.contributor = resp.data.data
+          this.attachments = normalize(resp.data, { camelizeKeys: false }).attachment
           let allRelations = normalize(resp.data, { camelizeKeys: false }).contributor_relation
           Object.keys(allRelations).forEach((relKey) => {
             if (allRelations[relKey].attributes.festival_id === this.$pixelache.slug ) {

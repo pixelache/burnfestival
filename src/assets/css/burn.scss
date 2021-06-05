@@ -1,6 +1,6 @@
 @charset "utf-8";
 $navbar-padding-vertical: 0;
-$navbar-height: 4rem;
+$navbar-height: 2rem;
 $background: #333;
 $light_base_color: #EEE;
 $title-color: $light_base_color;
@@ -17,7 +17,8 @@ $navbar-dropdown-background-color: rgb(47, 46, 46);
 $navbar-dropdown-item-hover-background-color:  white;
 $navbar-background-color : #231f20;
 $footer-background-color: #414141;
-$footer-padding: 1rem 1.5rem;
+$footer-height: 95px;
+$footer-padding: 0 1.5rem;
 @import "~bulma/bulma";
 @import 'search';
 
@@ -52,6 +53,15 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 75px;
+  background-image: url('~@/assets/images/logo_white.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  .column {
+    padding: 0;
+  }
 
   .social_container {
     float: left;
@@ -63,19 +73,7 @@ footer {
 
       font-size: 1.2rem;
     }
-    ul.social {
-      float: right;
-      list-style-type: none;
-      li {
-        float: left;
-        a {
-          img {
-            max-height: 1.5rem;
-            padding: 0 0.2rem;
-          }
-        }
-      }
-    }
+    
   }
 }
 body, nav {
@@ -94,6 +92,29 @@ b, strong {
 
 
 nav {
+
+  &.top {
+ 
+    ul.social {
+      float: right;
+      list-style-type: none;
+      li {
+        float: left;
+        @include mobile {
+          float: right;
+        }
+        a {
+          img {
+            max-height: 1.5rem;
+            @include mobile {
+              max-height: 1rem;
+            }
+            padding: 0 0.2rem;
+          }
+        }
+      }
+    }
+  }
   input[type=search] {
     color: black;
   }
@@ -104,8 +125,22 @@ nav {
       margin-bottom: 2rem;
     }
   }
-  &.top {
+  &.top, &.second {
     z-index: 40;
+  }
+  &.top {
+    .navbar-brand {
+      padding-top: 0.4rem;
+    }
+    .navbar-end {
+      padding-top: 0.75rem;
+    }
+    .title {
+      margin-bottom: 0;
+      span {
+        font-size: 1.2rem;
+      }
+    }
   }
   .navbar-link:not(.is-arrowless)::after, .select:not(.is-multiple):not(.is-loading)::after {
     font-size: 1.2rem;
@@ -149,13 +184,34 @@ nav {
       font-weight: bold;
     }
   }
+
+  .has-dropdown:hover {
+
+    a.navbar-item {
+      color: black;
+    }
+    .navbar-dropdown {
+      a {
+        color: #eee;
+      }
+      a.router-link-active {
+       
+        color: black;
+       
+      }
+    }
+  }
   .navbar-dropdown {
     @include mobile {
       padding: 0;
     }
+    
     a.navbar-item {
       font-size: 1.5rem;
       line-height: 1.2rem;
+      &:hover {
+        color: black;
+      }
       @include widescreen {
         font-size: 1.6rem;
         line-height: 2rem;
@@ -280,6 +336,7 @@ section.section {
   }
   &.streams {
     padding: 3.5rem 1.5rem;
+
   }
 }
 section.post_index {
@@ -288,6 +345,8 @@ section.post_index {
     padding-left: 1rem;
   }
 }
+
+
 
 section.event {
   padding-bottom: 6rem;
@@ -319,8 +378,34 @@ section.event {
     }
   }
 }
+#schedule_days {
+  margin: 2.5rem 0;
+}
+.schedule_container {
+  strong {
+    font-weight: 800;
+  }
+  
+}
+.radio_schedule {
+  &.content {
+    table {
+      border-width: 0;
+      tbody {
+
+        tr:last-child {
+
+           td {
+            bottom-border-width: 0;
+           }
+        }
+      }
+    }
+  }
+}
 section.post_index, section.post_standalone {
   color: $light_base_color;
+  padding-bottom: 12rem;
   .category_description, .category_image {
     padding-left: 1rem;
     margin: 1rem 0;
@@ -495,14 +580,25 @@ table.table {
       }
     }
   }
+  footer {
+    height: 300px;
+    position: relative;
+    background-image: url('~@/assets/images/logos.png');
+    background-size: cover;
+  }
 }
 
 @media screen and (max-width: 480px) {
   footer {
+    height: 186px;
+    position: relative;
+    background-image: url('~@/assets/images/logos.png');
+    background-size: cover;
+
     &.footer {
-      padding: 1rem 1.5rem 0rem 1rem;
+
       .column {
-        padding: 0.25rem;
+        padding: 0;
       }
       .social_container {
         .columns {

@@ -72,7 +72,8 @@
         </div>
         <div class="column is-6" v-if="radio"  v-show="!isMobile() || tabsel == 'radio'">
           <h3 class="title is-hidden-mobile">Radio</h3>
-          <div class="content" v-html="radio.attributes.body" />
+          <RadioPlayer />
+          <div class="radio_schedule content" v-html="radio.attributes.body" />
         </div>
       </div>
     </div>  
@@ -83,6 +84,7 @@
 </template>
 <script>
  import moment from 'moment'
+ import RadioPlayer from '@/components/RadioPlayer'
  import normalize from 'json-api-normalizer'
   export default {
     data() {
@@ -99,6 +101,9 @@
         installationId: null,
         conversationsId: null
       }
+    },
+    components: {
+      RadioPlayer
     },
     name: 'Schedule',
     methods: {

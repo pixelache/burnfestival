@@ -2,6 +2,43 @@
   <div id="app">
     <nav class="navbar top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
+        <a href="https://pixelache.ac/" class="navbar-item"><img class="footer_logo" width="237" src="@/assets/images/footer_logo.png" /></a>
+      </div>
+      <div class="navbar-menu">
+        <div class="title  is-hidden-mobile  has-text-centered">
+          <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].date_range }}</span>
+      
+        </div>
+        <div class="navbar-end">
+          <div class="social_wrapper is-one-third-mobile">
+            <ul class="social">
+              <li>
+                <a href="https://www.facebook.com/pixelache">
+                  <img src="@/assets/images/some_fb.png" />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.flickr.com/photos/pixelache/">
+                  <img src="@/assets/images/some_flickr.png" />
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/pixelache">
+                  <img src="@/assets/images/some_twitter.png" />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/pixelache/">
+                  <img src="@/assets/images/some_insta.png" />
+                </a>
+              </li>                   
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar second" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
           <img src="@/assets/images/burn_logo.png" />
         </router-link>
@@ -140,43 +177,10 @@
     
     <router-view :key="$route.fullPath + '?locale=' + locale" />
     <footer class="footer" v-if="!loading">    
-      <div class="social_container">
-        <div class="columns is-mobile">
-          <div class="column is-one-third-tablet">
-            <a href="https://pixelache.ac/"><img class="footer_logo" src="@/assets/images/footer_logo.png" /></a>
-          </div>
-          <div class="column footer_title_wrapper is-one-third-mobile has-text-centered">
-            <div class="title  has-text-centered">
-              <span v-for="l in ['en', 'fi', 'sv', 'ru']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].date_range }}</span>
-            <!-- {{ moment(festival.attributes.start_at).format("Do ")}} –– {{ moment(festival.attributes.end_at).format("Do MMMM YYYY")}} -->
-            </div>
-          </div>
-          <div class="column social_wrapper is-one-third-mobile">
-            <ul class="social">
-              <li>
-                <a href="https://www.facebook.com/pixelache">
-                  <img src="@/assets/images/some_fb.png" />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.flickr.com/photos/pixelache/">
-                  <img src="@/assets/images/some_flickr.png" />
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/pixelache">
-                  <img src="@/assets/images/some_twitter.png" />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com/pixelache/">
-                  <img src="@/assets/images/some_insta.png" />
-                </a>
-              </li>                   
-            </ul>
-          </div>
-        </div>
-      </div>
+
+        
+    
+ 
     </footer>
   </div>
 </template>
