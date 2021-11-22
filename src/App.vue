@@ -72,9 +72,9 @@
               <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].about }}</span>
             </router-link>
             <div class="navbar-dropdown">
-              <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'curatorial-notes'}}">
+              <!-- <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'curatorial-notes'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].curatorial }}</span>
-              </router-link>
+              </router-link> -->
               <router-link class="navbar-item" :to="{name: 'Page', params: {id: 'press'}}">
                 <span v-for="l in ['fi', 'en', 'ru', 'sv']" :key="l" v-show="l === $i18n.locale">{{ $texts[l].press }}</span>
               </router-link>

@@ -53,7 +53,7 @@ export default {
           if (this.scrolledToBottom) {
             this.scrolledToBottom = false
             this.loadingNext = true
-            this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?page=' + parseInt(this.page+1) + '&locale=' + this.$i18n.locale)
+            this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?page[number]=' + parseInt(this.page+1) + '&page[size]=12&locale=' + this.$i18n.locale)
             .then((resp) => {
 
               if (resp.data.data.length > 0) {
@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted () {
-    this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?page=' + this.page + '&locale=' + this.$i18n.locale)
+    this.axios.get('/festivals/' + this.$pixelache.slug + '/posts?page[number]=' + this.page + '&page[size]=12&locale=' + this.$i18n.locale)
     .then((resp) => {
 
       this.posts = resp.data.data

@@ -1,5 +1,5 @@
 <template>
-  <section class="section post_index has-text-left" v-if="!loading">
+  <section class="section post_index contributors has-text-left" v-if="!loading">
     <div class="columns" v-if="category.attributes">
       <div class="column">
         <h2 class="title">{{ category.attributes.name }}</h2>
@@ -33,6 +33,9 @@
           
           <div class="content" v-html="contributor.attributes.bio" />
           <div class="block">
+            <router-link :to="{name: 'Contributor', params: { categoryId: category.attributes.slug, id: contributor.attributes.slug }}">{{ $texts[$i18n.locale].read_more }}</router-link>
+          </div>
+          <div class="block">
             <a class="is-size-6" target="_blank" :href="contributor.attributes.website" v-if="contributor.attributes.website">{{ contributor.attributes.website }}</a>
           </div>
           <div class="events">
@@ -54,8 +57,9 @@
   </div>
 </template>
 <script>
-  import moment  from 'moment'
+  import moment  from 'moment-timezone'
   import normalize from 'json-api-normalizer'
+
   export default {
     data() {
       return {
@@ -71,9 +75,9 @@
         let start_date = moment(startAt).locale(this.locale).format('D')
         let end_date = moment(endAt).locale(this.locale).format('D')
         if (start_date === end_date) {
-          return moment(startAt).locale(this.locale).format('LLL') + ' – ' + moment(endAt).locale(this.locale).format('LT')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('LLL') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LT')
         } else {
-          return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('D') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LL')
         }
       }
     },

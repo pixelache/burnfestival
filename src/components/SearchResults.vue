@@ -118,7 +118,7 @@
     </div>
 </template>
 <script>
-import moment from 'moment'
+import moment from 'moment-timezone'
 import normalize from 'json-api-normalizer'
 import truncate from 'truncate-html'
 export default {
@@ -147,9 +147,9 @@ export default {
       let start_date = moment(startAt).locale(this.locale).format('D')
       let end_date = moment(endAt).locale(this.locale).format('D')
       if (start_date === end_date) {
-        return moment(startAt).locale(this.locale).format('LLL') + ' – ' + moment(endAt).locale(this.locale).format('LT')
+        return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('LLL') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LT')
       } else {
-        return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
+        return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('D') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LL')
       }
     },
     excerpt_or_text(post) {

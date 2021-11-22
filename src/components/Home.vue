@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <img class="burn_banner" alt="Pixleache 2021 Burn" src="@/assets/images/burnbanner.jpg"> -->
-    <section class="section streams">
+    <img class="burn_banner" alt="Pixleache 2021 Burn" src="@/assets/images/burnbanner.jpg">
+    <!-- <section class="section streams">
    
         <div class="columns ">
           <div class="column is-6 has-text-left">
@@ -48,7 +48,7 @@
           </div>
         </div>
   
-    </section>
+    </section> -->
     <PostsIndex />
 
   </div>
@@ -56,17 +56,17 @@
 
 <script>
 // @ is an alias to /src
-import moment from 'moment'
+import moment from 'moment-timezone'
 import PostsIndex from '@/components/PostsIndex.vue'
-import VueTwitchPlayer from 'vue-twitch-player'
+// import VueTwitchPlayer from 'vue-twitch-player'
 import truncate from 'truncate-html'
-import RadioPlayer from '@/components/RadioPlayer'
+// import RadioPlayer from '@/components/RadioPlayer'
 export default {
   name: 'Home',
   components: {
     PostsIndex,
-    VueTwitchPlayer,
-    RadioPlayer
+    // VueTwitchPlayer,
+    // RadioPlayer
   },
   data () {
     return {
@@ -85,9 +85,9 @@ export default {
         let start_date = moment(startAt).locale(this.locale).format('D')
         let end_date = moment(endAt).locale(this.locale).format('D')
         if (start_date === end_date) {
-          return moment(startAt).locale(this.locale).format('LLL') + ' – ' + moment(endAt).locale(this.locale).format('LT')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('LLL') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LT')
         } else {
-          return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('D') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LL')
         }
       }
   },

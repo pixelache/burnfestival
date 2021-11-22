@@ -6,19 +6,23 @@ import './registerServiceWorker'
 import router from './router'
 import Toasted from 'vue-toasted'
 import store from './store'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import 'moment/locale/fi'
 import 'moment/locale/sv'
 import 'moment/locale/ru'
 import 'moment/locale/en-gb'
-import LoadScript from 'vue-plugin-load-script';
-
+import LoadScript from 'vue-plugin-load-script'
+import VueScrollTo from 'vue-scrollto'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+import vueVimeoPlayer from 'vue-vimeo-player'
+Vue.use(vueVimeoPlayer)
+Vue.use(VueYouTubeEmbed)
 Vue.use(LoadScript);
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
 Vue.use(Toasted)
-
+Vue.use(VueScrollTo)
 Vue.router = router
 Vue.axios.defaults.baseURL = process.env.VUE_APP_API_URL
 Vue.prototype.moment = moment

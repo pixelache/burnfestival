@@ -20,8 +20,9 @@
           </div>
           <span v-else class="is-size-6"> - {{ place[event.attributes.place_id].attributes.address_no_country }}</span>
             <router-link target="_blank" :to="{name: 'Page', params: {id: 'site-map'}}" class="tag is-primary">{{ $texts[$i18n.locale].see_map }}</router-link> 
-          </span>
+
         </h2>
+        <a v-if="hasDocumentation" href="#" v-scroll-to="'#documentation'" class="tag is-primary is-large">{{ $texts[$i18n.locale].documentation }}</a>
       </div>
     </div>
     <div class="columns is-centered" >
@@ -66,6 +67,59 @@
         </div>
       </div>
     </div>
+    <section  v-if="hasDocumentation" id="documentation">
+      <div  class="columns documentation is-centered">
+        <div class="column is-8">
+          <h3 class="title">{{ $texts[$i18n.locale].documentation }}</h3>
+        </div>
+      </div>
+      <div v-if="event.relationships.videos.data.length > 0">
+        <div class="columns is-centered" v-for="video in event.relationships.videos.data" :key="video.id">
+          <div class="column is-8 video-embed_archive">
+            <youtube v-if="videos[video.id].attributes.videohost_id === 2" :video-id="videos[video.id].attributes.hostid"></youtube>
+            <vimeo-player v-else-if="videos[video.id].attributes.videohost_id === 1" ref="player" :video-id="videos[video.id].attributes.hostid"/>
+          </div>
+        </div>
+      </div>
+      
+      <div v-if="carouselImages.length > 0" class="columns is-centered is-multiline is-mobile" >
+        <div class="column is-8">
+          <h3 class="subtitle">{{ $texts[$i18n.locale].photos }}: </h3>
+          <div class="columns is-multiline">
+            <gallery :options="{carousel: true, startSlideshow: false,  closeOnEscape: true}" :images="carouselImages" :index="index" @close="index = null" >
+             
+            </gallery>
+            <div
+              class="column is-one-quarter image"
+              v-for="(image, imageIndex) in carouselImages"
+              :key="imageIndex"
+              @click="index = imageIndex"
+              
+            ><img :src="image.poster" /> 
+            <strong v-if="image.title">{{image.title}}</br></strong>
+              <span class="is-size-7" v-if="image.description">
+              <em>photo: {{ image.description }}</em></span>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+      <div v-if="event.relationships.attachments.data.length > 0" class="columns is-centered">
+        <div class="column is-8">
+          <h4 class="subtitle">{{ $texts[$i18n.locale].other_material }}: </h4>
+          <div class="columns" v-for="attachment in event.relationships.attachments.data" :key="attachment.id + '_atc'"> 
+            <div class="column is-6" v-if="attachments[attachment.id].attributes.attachment_festival_slug === $pixelache.slug">
+              <aplayer v-if="attachments[attachment.id].attributes.attachedfile_content_type =~ /^audio/" :music="{
+                title: attachments[attachment.id].attributes.attachment_filename,
+
+                src: attachments[attachment.id].attributes.attachedfile_url
+                }" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="columns disclaimer is-centered">
       <div class="column is-8">
         <div class="content disclaimer is-size-5" v-html="$texts[$i18n.locale].disclaimer">
@@ -177,9 +231,11 @@
   </div>
 </template>
 <script>
-  import moment from 'moment'
+  import moment from 'moment-timezone'
   import normalize from 'json-api-normalizer'
   import VueHcaptcha from '@hcaptcha/vue-hcaptcha'
+  import VueGallery from 'vue-gallery';
+  import Aplayer from 'vue-aplayer'
   export default {
     data() {
       return {
@@ -187,10 +243,16 @@
         errors: [],
         locale: this.$i18n.locale,
         loading: true,
+        hasDocumentation: false,
         event: {},
-         festivalthemes: {},
+        festivalthemes: {},
+        index: null,
         successfulRegistration: false,
         place: {},
+        videos: {},
+        carouselImages: [],
+        attachments: {},
+        photos: {},
         notSubmitted: true,
         registrationOpen: false,
         registrationForm: {},
@@ -199,7 +261,11 @@
       }
     },
     name: 'Event',
-    components: { VueHcaptcha },
+    components: { 
+      Aplayer,
+      VueHcaptcha, 
+      gallery: VueGallery 
+    },
     computed: { 
         isFormValid () {
           let valid = this.registrationForm.name || this.registrationForm.email || this.registrationForm.phone
@@ -237,13 +303,20 @@
         }
         return message
       },
+      openLightbox () {
+        this.showLightbox = true
+        this.$refs.lightbox.showImage(1)
+      },
+      changeImage (index) {
+        console.log(index)
+      },
       getRange(startAt, endAt) {
         let start_date = moment(startAt).locale(this.locale).format('D')
         let end_date = moment(endAt).locale(this.locale).format('D')
         if (start_date === end_date) {
-          return moment(startAt).locale(this.locale).format('LLL') + ' – ' + moment(endAt).locale(this.locale).format('LT')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('LLL') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LT')
         } else {
-          return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('D') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LL')
         }
       },
       verifiedHcaptcha (token) {
@@ -301,6 +374,20 @@
           this.place = normalize(resp.data, { camelizeKeys: false }).place
           this.contributors = normalize(resp.data, { camelizeKeys: false }).contributor
           this.festivalthemes = normalize(resp.data, { camelizeKeys: false }).festivaltheme
+          this.videos = normalize(resp.data, { camelizeKeys: false }).video
+          this.attachments = normalize(resp.data, { camelizeKeys: false }).attachment
+          this.photos = normalize(resp.data, { camelizeKeys: false }).photo
+          this.event.relationships.photos.data.forEach((p) => {
+            this.carouselImages.push({
+                href: this.photos[p.id].attributes.filename_url, 
+                title: this.photos[p.id].attributes.title,
+                description: this.photos[p.id].attributes.credit ? "photo: " + this.photos[p.id].attributes.credit : null,
+                poster: this.photos[p.id].attributes.filename_box_url, 
+              })
+          })
+          if (this.photos || this.videos || this.attachments) {
+            this.hasDocumentation = true
+          }
           this.loading = false
           if (this.event.attributes.registration_required && ( new Date(this.event.attributes.start_at) >=  new Date().getTime())) {
             this.registrationOpen = true

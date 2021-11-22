@@ -46,7 +46,7 @@
         <div class="columns" v-for="attachment in contributor.relationships.attachments.data" :key="attachment.id + '_atc'"> 
           <div class="column is-6" v-if="attachments[attachment.id].attributes.attachment_festival_slug === $pixelache.slug">
             <aplayer v-if="attachments[attachment.id].attributes.attachedfile_content_type =~ /^audio/" :music="{
-              title: attachments[attachment.id].attributes.attachment_event_name,
+              title: attachments[attachment.id].attributes.attachment_filename,
               artist: contributor.attributes.name,
               src: attachments[attachment.id].attributes.attachedfile_url
               }" />
@@ -60,7 +60,7 @@
   </div>
 </template>
 <script>
-  import moment from 'moment'
+  import moment from 'moment-timezone'
   import normalize from 'json-api-normalizer'
   import Aplayer from 'vue-aplayer'
 
@@ -83,9 +83,9 @@
         let start_date = moment(startAt).locale(this.locale).format('D')
         let end_date = moment(endAt).locale(this.locale).format('D')
         if (start_date === end_date) {
-          return moment(startAt).locale(this.locale).format('LLL') + ' – ' + moment(endAt).locale(this.locale).format('LT')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('LLL') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LT')
         } else {
-          return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
+          return moment(startAt).locale(this.locale).tz('Europe/Helsinki').format('D') + ' – ' + moment(endAt).locale(this.locale).tz('Europe/Helsinki').format('LL')
         }
       }
     },

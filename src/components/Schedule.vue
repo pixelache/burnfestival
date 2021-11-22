@@ -31,6 +31,7 @@
       <div class="columns">
         <div class="column is-6 has-text-left"  v-show="!isMobile()  || tabsel == 'oodi'">
           <h3 class="title is-hidden-mobile">Oodi Site-specific</h3>
+          <p>{{ $texts[$i18n.locale].all_times_eet }}</p>
           <table class="table"  v-if="events.length > 0">
             <tbody>              
               <tr v-for="event in events" :key="event.id + '__' + moment(selectedDate).format('YYYY-MM-DD')">
@@ -39,7 +40,7 @@
                     {{ $texts[$i18n.locale].durational }}
                   </span>
                   <span v-else>
-                    {{moment(event.attributes.start_at).locale(locale).format("LT") }}
+                    {{moment(event.attributes.start_at).locale(locale).tz("Europe/Helsinki").format("LT") }}
                   </span>
                 </td>
                 <td class="is-hidden-mobile">
@@ -72,7 +73,7 @@
         </div>
         <div class="column is-6" v-if="radio"  v-show="!isMobile() || tabsel == 'radio'">
           <h3 class="title is-hidden-mobile">Radio</h3>
-          <RadioPlayer />
+          <!-- <RadioPlayer />i do -->
           <div class="radio_schedule content" v-html="radio.attributes.body" />
         </div>
       </div>
@@ -83,8 +84,8 @@
   </div>
 </template>
 <script>
- import moment from 'moment'
- import RadioPlayer from '@/components/RadioPlayer'
+ import moment from 'moment-timezone'
+//  import RadioPlayer from '@/components/RadioPlayer'
  import normalize from 'json-api-normalizer'
   export default {
     data() {
@@ -103,7 +104,7 @@
       }
     },
     components: {
-      RadioPlayer
+      // RadioPlayer
     },
     name: 'Schedule',
     methods: {
@@ -167,9 +168,9 @@
         let start_date = moment(startAt).locale(this.locale).format('D')
         let end_date = moment(endAt).locale(this.locale).format('D')
         if (start_date === end_date) {
-          return moment(startAt).locale(this.locale).format('LLL') + ' – ' + moment(endAt).locale(this.locale).format('LT')
+          return moment(startAt).locale(this.locale).tz("Europe/Helsinki").format('LLL') + ' – ' + moment(endAt).locale(this.locale).tz("Europe/Helsinki").format('LT')
         } else {
-          return moment(startAt).locale(this.locale).format('D') + ' – ' + moment(endAt).locale(this.locale).format('LL')
+          return moment(startAt).locale(this.locale).tz("Europe/Helsinki").format('D') + ' – ' + moment(endAt).locale(this.locale).tz("Europe/Helsinki").format('LL')
         }
       }
     },
@@ -183,9 +184,9 @@
       let start = moment('2021-06-06')
       const theEnd = moment('2021-06-14')
       if (now <= start || now >= theEnd) {
-        this.selectedDate = moment(start).format('YYYY-DD-MM')
+        this.selectedDate = moment(start).format('YYYY-MM-DD')
       } else {
-        this.selectedDate =  moment(now).format('YYYY-DD-MM')
+        this.selectedDate =  moment(now).format('YYYY-MM-DD')
       }
       while(start.isBefore(theEnd, 'day')) {
         this.navCalendar.push(start.toDate())
